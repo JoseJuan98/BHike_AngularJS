@@ -36,14 +36,14 @@
 					<div class="datetime">
 						<label for="date" class="route_lab">Date and time of start.</label>
 						<div class="date_div">
-							<input type="date" name="date" id="date_route" class="inputs" data-ng-model="routeHandlerVM.route.dateSimple" data-ng-readonly="routeHandlerVM.functions.where('/deleteRoute/'+routeHandlerVM.route.id)" >
-							<input type="time" name="time" class="inputs" id="time_route" data-ng-model="routeHandlerVM.route.timeSimple" data-ng-readonly="routeHandlerVM.functions.where('/deleteRoute/'+routeHandlerVM.route.id)" >
+							<input type="date" name="date" id="date_route" class="inputs" placeholder="yyyy-MM-dd" value="{{ routeHandlerVM.route.dateSimple }}" data-ng-model="routeHandlerVM.route.dateSimple" data-ng-readonly="routeHandlerVM.functions.where('/deleteRoute/'+routeHandlerVM.route.id)" >
+							<input type="time" name="time" class="inputs" id="time_route" placeholder="HH:mm"  value="{{ routeHandlerVM.route.timeSimple }}" data-ng-model="routeHandlerVM.route.timeSimple" data-ng-readonly="routeHandlerVM.functions.where('/deleteRoute/'+routeHandlerVM.route.id)" >
 						</div>
 					</div>
 				</div>
 
 				<input type="number" name="elevation" class="inputs"
-					placeholder="Elevation (m)" min="0" step="10" required
+					placeholder="Elevation (m)" min="0" step="100" required
 					data-ng-model="routeHandlerVM.route.elevation"
 					data-ng-readonly="routeHandlerVM.functions.where('/deleteRoute/'+routeHandlerVM.route.id)"><br>
 				
@@ -55,11 +55,11 @@
 					</div>
 				</fieldset>
 				<label for="difficulty" class="route_lab">Difficulty of the route: </label> 
-				<select name="difficulty" required data-ng-disabled="routeHandlerVM.functions.where('/deleteRoute/'+routeHandlerVM.route.id)" data-ng-model="routeHandlerVM.route.difficulty">
-					<option > Please select </option>
-					<option value="1">Easy selected</option>
-					<option value="2">Medium selected</option>
-					<option value="3">Difficult selected</option>
+				<select name="difficulty" required data-ng-disabled="routeHandlerVM.functions.where('/deleteRoute/'+routeHandlerVM.route.id)"  data-ng-model="routeHandlerVM.route.difficulty">
+					<option data-ng-show="routeHandlerVM.functions.where('/createRoute')"> Please select </option>
+					<option data-ng-show="!routeHandlerVM.functions.where(/createRoute')" value="1" data-ng-selected="routeHandlerVM.route.difficulty == 1"> Easy selected </option>
+					<option data-ng-show="!routeHandlerVM.functions.where(/createRoute')" value="2" data-ng-selected="routeHandlerVM.route.difficulty == 2"> Medium selected </option>
+					<option data-ng-show="!routeHandlerVM.functions.where(/createRoute')" value="3" data-ng-selected="routeHandlerVM.route.difficulty == 3"> Difficult selected </option>
 				</select>
 
 

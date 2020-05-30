@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import es.unex.pi.model.Route;
+import es.unex.pi.util.DateTimeHelper;
 
 public class JDBCRouteDAOImpl implements RouteDAO {
 
@@ -40,6 +41,9 @@ public class JDBCRouteDAOImpl implements RouteDAO {
 			
 			route.setKudos(rs.getInt("kudos"));
 			route.setBlocked(rs.getInt("blocked"));
+			
+			route.setDateSimple(DateTimeHelper.dateTime2Date(route.getDate()));
+			route.setTimeSimple(DateTimeHelper.date2Time(route.getDate()));
 			
 			logger.info("fetching routes: "+route.getId()+" "+route.getTitle()+" "+route.getDescription()+ " " + route.getDate() + " " + route.getDistance() 
 						+ " " + route.getElevation() + " " + route.getIdu() + " " + route.getKudos());

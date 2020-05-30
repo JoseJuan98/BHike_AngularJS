@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v9.0"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="/opt/apache-tomcat/lib/websocket-api.jar"/>
+	<classpathentry kind="lib" path="/opt/apache-tomcat/lib/tomcat-websocket.jar"/>
+	<classpathentry kind="lib" path="/opt/apache-tomcat/lib/tomcat-util-scan.jar"/>
+	<classpathentry kind="lib" path="/opt/apache-tomcat/lib/tomcat-util.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="https://tomcat.apache.org/tomcat-9.0-doc/api/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/opt/apache-tomcat/lib/tomcat-jni.jar"/>
+	<classpathentry kind="lib" path="/opt/apache-tomcat/lib/tomcat-jdbc.jar"/>
+	<classpathentry kind="lib" path="/opt/apache-tomcat/lib/tomcat-i18n-zh-CN.jar"/>
+	<classpathentry kind="lib" path="/opt/apache-tomcat/lib/tomcat-i18n-ru.jar"/>
+	<classpathentry kind="lib" path="/opt/apache-tomcat/lib/tomcat-i18n-pt-BR.jar"/>
+	<classpathentry kind="lib" path="/opt/apache-tomcat/lib/tomcat-i18n-ko.jar"/>
+	<classpathentry kind="lib" path="/opt/apache-tomcat/lib/tomcat-i18n-ja.jar"/>
+	<classpathentry kind="lib" path="/opt/apache-tomcat/lib/tomcat-i18n-fr.jar"/>
+	<classpathentry kind="lib" path="/opt/apache-tomcat/lib/tomcat-i18n-es.jar"/>
+	<classpathentry kind="lib" path="/opt/apache-tomcat/lib/tomcat-i18n-de.jar"/>
+	<classpathentry kind="lib" path="/opt/apache-tomcat/lib/tomcat-i18n-cs.jar"/>
+	<classpathentry kind="lib" path="/opt/apache-tomcat/lib/tomcat-dbcp.jar"/>
+	<classpathentry kind="lib" path="/opt/apache-tomcat/lib/tomcat-coyote.jar"/>
+	<classpathentry kind="lib" path="/opt/apache-tomcat/lib/tomcat-api.jar"/>
+	<classpathentry kind="lib" path="/opt/apache-tomcat/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="/opt/apache-tomcat/lib/jsp-api.jar"/>
+	<classpathentry kind="lib" path="/opt/apache-tomcat/lib/jaspic-api.jar"/>
+	<classpathentry kind="lib" path="/opt/apache-tomcat/lib/jasper-el.jar"/>
+	<classpathentry kind="lib" path="/opt/apache-tomcat/lib/jasper.jar"/>
+	<classpathentry kind="lib" path="/opt/apache-tomcat/lib/el-api.jar"/>
+	<classpathentry kind="lib" path="/opt/apache-tomcat/lib/ecj-4.13.jar"/>
+	<classpathentry kind="lib" path="/opt/apache-tomcat/lib/catalina-tribes.jar"/>
+	<classpathentry kind="lib" path="/opt/apache-tomcat/lib/catalina-storeconfig.jar"/>
+	<classpathentry kind="lib" path="/opt/apache-tomcat/lib/catalina-ssi.jar"/>
+	<classpathentry kind="lib" path="/opt/apache-tomcat/lib/catalina-ha.jar"/>
+	<classpathentry kind="lib" path="/opt/apache-tomcat/lib/catalina-ant.jar"/>
+	<classpathentry kind="lib" path="/opt/apache-tomcat/lib/catalina.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="https://tomcat.apache.org/tomcat-9.0-doc/api/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/opt/apache-tomcat/lib/annotations-api.jar"/>
+	<classpathentry kind="lib" path="/home/goldenfox/workspacePI/BHike_2/WebContent/WEB-INF/lib/validation-api-1.1.0.Final.jar"/>
+	<classpathentry kind="lib" path="/home/goldenfox/workspacePI/BHike_2/WebContent/WEB-INF/lib/standard.jar"/>
+	<classpathentry kind="lib" path="/home/goldenfox/workspacePI/BHike_2/WebContent/WEB-INF/lib/sqlite-jdbc-3.21.0.jar"/>
+	<classpathentry kind="lib" path="/home/goldenfox/workspacePI/BHike_2/WebContent/WEB-INF/lib/persistence-api-1.0.jar"/>
+	<classpathentry kind="lib" path="/home/goldenfox/workspacePI/BHike_2/WebContent/WEB-INF/lib/osgi-resource-locator-1.0.1.jar"/>
+	<classpathentry kind="lib" path="/home/goldenfox/workspacePI/BHike_2/WebContent/WEB-INF/lib/org.osgi.core-4.2.0.jar"/>
+	<classpathentry kind="lib" path="/home/goldenfox/workspacePI/BHike_2/WebContent/WEB-INF/lib/jstl.jar"/>
+	<classpathentry kind="lib" path="/home/goldenfox/workspacePI/BHike_2/WebContent/WEB-INF/lib/jersey-server.jar"/>
+	<classpathentry kind="lib" path="/home/goldenfox/workspacePI/BHike_2/WebContent/WEB-INF/lib/jersey-media-jaxb.jar"/>
+	<classpathentry kind="lib" path="/home/goldenfox/workspacePI/BHike_2/WebContent/WEB-INF/lib/jersey-guava-2.22.2.jar"/>
+	<classpathentry kind="lib" path="/home/goldenfox/workspacePI/BHike_2/WebContent/WEB-INF/lib/jersey-container-servlet-core.jar"/>
+	<classpathentry kind="lib" path="/home/goldenfox/workspacePI/BHike_2/WebContent/WEB-INF/lib/jersey-container-servlet.jar"/>
+	<classpathentry kind="lib" path="/home/goldenfox/workspacePI/BHike_2/WebContent/WEB-INF/lib/jersey-common.jar"/>
+	<classpathentry kind="lib" path="/home/goldenfox/workspacePI/BHike_2/WebContent/WEB-INF/lib/jersey-client.jar"/>
+	<classpathentry kind="lib" path="/home/goldenfox/workspacePI/BHike_2/WebContent/WEB-INF/lib/jaxb-api-2.2.7.jar"/>
+	<classpathentry kind="lib" path="/home/goldenfox/workspacePI/BHike_2/WebContent/WEB-INF/lib/javax.ws.rs-api-2.0.1.jar"/>
+	<classpathentry kind="lib" path="/home/goldenfox/workspacePI/BHike_2/WebContent/WEB-INF/lib/javax.servlet-api-3.0.1.jar"/>
+	<classpathentry kind="lib" path="/home/goldenfox/workspacePI/BHike_2/WebContent/WEB-INF/lib/javax.inject-2.4.0-b34.jar"/>
+	<classpathentry kind="lib" path="/home/goldenfox/workspacePI/BHike_2/WebContent/WEB-INF/lib/javax.annotation-api-1.2.jar"/>
+	<classpathentry kind="lib" path="/home/goldenfox/workspacePI/BHike_2/WebContent/WEB-INF/lib/javassist-3.18.1-GA.jar"/>
+	<classpathentry kind="lib" path="/home/goldenfox/workspacePI/BHike_2/WebContent/WEB-INF/lib/hk2-utils-2.4.0-b34.jar"/>
+	<classpathentry kind="lib" path="/home/goldenfox/workspacePI/BHike_2/WebContent/WEB-INF/lib/hk2-locator-2.4.0-b34.jar"/>
+	<classpathentry kind="lib" path="/home/goldenfox/workspacePI/BHike_2/WebContent/WEB-INF/lib/hk2-api-2.4.0-b34.jar"/>
+	<classpathentry kind="lib" path="/home/goldenfox/workspacePI/BHike_2/WebContent/WEB-INF/lib/genson-1.3.jar"/>
+	<classpathentry kind="lib" path="/home/goldenfox/workspacePI/BHike_2/WebContent/WEB-INF/lib/asm-debug-all-5.0.4.jar"/>
+	<classpathentry kind="lib" path="/home/goldenfox/workspacePI/BHike_2/WebContent/WEB-INF/lib/aopalliance-repackaged-2.4.0-b34.jar"/>
+	<classpathentry kind="output" path="build/classes"/>
+</classpath>

@@ -1,0 +1,17 @@
+<div class="no_style" id="noneSt" data-ng-controller="headerCtrl as headerVM">	
+	<div class="nav_div" data-ng-if="headerVM.user.username != ''">
+		<ul>
+			<li><a href="index.html">Home</a></li>
+			<li><a href="#!/createRoute">Add Route</a></li>
+			<li class="search_li">
+				<form class="form_nav" method="get" action="../SearchServlet.do">
+					<input type="search" name="search" class="search_input" placeholder="Search"> 
+					<input id="icon_search" type="submit" value="->">
+				</form>
+			</li>
+			<li id="home_right_bar"><a href="../UpdateUserServlet.do">User Settings</a></li>
+			<li id="home_right_bar"><a class="logout_h" href="../LogoutServlet.do" >Logout</a></li>
+			<li><img class="img_nav" alt="BHike" src="../img/BHike_blue.png"></li>
+		</ul>
+	</div>
+</div>

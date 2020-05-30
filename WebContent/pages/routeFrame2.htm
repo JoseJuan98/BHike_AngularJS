@@ -1,0 +1,21 @@
+				<h4 class="title_us_View">${route.title}
+					<c:if test="${route.blocked=='1'}"> ( BLOCKED )</c:if>
+				</h4>
+				<t:routeInfo route="${route}"></t:routeInfo>
+			</div>
+			<div class="kudo_div_View">
+				<c:choose>
+					<c:when test="${userType ne 'NoUser'}">
+
+						<t:kudo route="${route}"></t:kudo>
+
+					</c:when>
+				</c:choose>
+				<p>${route.kudos}</p>
+			</div>
+			<c:choose>
+				<c:when test="${userType eq  'NoUser'}">
+					<a class="logout_h" href="<c:url value='LoginServlet.do'/>">Login
+						for kudos.</a>
+				</c:when>
+			</c:choose>

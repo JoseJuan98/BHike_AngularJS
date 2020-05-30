@@ -1,0 +1,37 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+<div class="rtUsr_container">
+	<div>
+	<div class="div_logo">
+		<img class="img_logo" alt="BHike" src="../img/BHike_purple.png">
+	</div>
+	<p> If you are searching for a new adventure this is your page.</p>
+	<br>
+	</div>
+	<h2>Routes by users:</h2>
+	<div data-ng-repeat="routesByUser in mapVM.routes">
+		<div class="div_routesUsr" data-ng-if="routesByUser.value != ''">
+			<h3 class="title_m">User: {{ routesByUser.key.username }}</h3>
+			<h3 class="title_m">Email: {{ routesByUser.key.email }}</h3>
+			<div class="routes_container">
+				<div data-ng-repeat="route in routesByUser.value">
+					<div class="user_routes" data-ng-if=" route.blocked != 1 " 
+					data-ng-include="'routeFrame.htm'">
+
+					</div>
+				</div>
+
+			</div>
+			<br>
+			<h3 class="title_m">Blocked Routes</h3>
+			<div class="blocked_container">
+				<div data-ng-repeat="route in routesByUser.value">
+					<div class="user_routes" id="block_div"
+						data-ng-if=" route.blocked == 1 "
+						data-ng-include="'routeFrame.htm'">
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>

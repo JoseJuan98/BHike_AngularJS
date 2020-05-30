@@ -1,0 +1,24 @@
+<div class="rtView_box">
+	<div class="rtView" data-ng-show=" route.blocked != 1 " data-ng-include="'include/routeEditDisplay.htm'" >
+	</div>
+	<div class="rtView" data-ng-show=" route.blocked == 1 " id="block_div" data-ng-include="'include/routeEditDisplay.htm'">
+
+
+		<div class="Nowner_imgView_div" data-ng-show=" route.idu != userRt.id " data-ng-include="'include/routeHead.htm'">
+
+		</div>
+		<div class="rtView_img_div" data-ng-show=" route.idu == userRt.id"  data-ng-include="'include/routeHead.htm'">
+
+		</div>
+			<div class="<c:choose>
+				<c:when test=" ${CheckTypeRtUser eq 'NoOwner' }">
+				rtView_info_div
+				</c:when>
+				<c:otherwise>
+					rtView_info_div_Owner
+				</c:otherwise>
+				</c:choose>" >
+
+
+		</div>
+	</div>

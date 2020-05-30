@@ -1,0 +1,22 @@
+
+
+		<h4 class="title_us_route">{{route.title}}</h4>
+		<div class="rtFrame_img" >
+			<img alt="Hike" class="img_frame" data-ng-show="route.difficulty == 1" src="../img/hike1.jpeg">
+			<img alt="Hike" class="img_frame" data-ng-show="route.difficulty == 2" src="../img/swim1.jpeg">
+			<img alt="Hike" class="img_frame" data-ng-show="route.difficulty == 3" src="../img/ciclying1.jpeg">
+		</div>
+		<p>{{route.description}}</p>
+		<p>{{route.distance}} Km (D) {{route.elevation}} m(E)
+			{{route.durationH}}h{{route.durationM}} Duration </p>
+		<p> On {{route.date}} </p>
+		<p data-ng-show="route.difficulty == 1 "> Easy </p>
+		<p data-ng-show="route.difficulty == 2 "> Medium </p>
+		<p data-ng-show="route.difficulty == 3 "> Difficult </p>
+		<p data-ng-show="route.blocked == 1"> Blocked Route </p>
+		<p data-ng-show="route.blocked != 1"> Available Route </p>
+		<p>Kudos - {{route.kudos}}</p>
+		<p class="see">
+			<a class="logout_home" href="#!/SeeRoute/{{route.id}}" >See</a>
+		</p>
+

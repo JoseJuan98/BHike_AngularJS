@@ -25,6 +25,11 @@ angular.module('BHikeApp', ['ngRoute'])
 			controller: "routeHandlerCtrl",
 			controllerAs: "routeHandlerVM",
 			templateUrl: "routeHandlerTemplate.html"
+		})
+	    .when("/seeRoute/:ID", {
+			controller: "seeRouteCtrl",
+			controllerAs: "seeRouteVM",
+			templateUrl: "routeView.html"
         })
         .when("/deleteRoute/:ID", {
 			controller: "routeHandlerCtrl",

@@ -37,6 +37,15 @@ angular.module('BHikeApp')
 	    			console.log("Error reading categories", response);
 	    		})
 		},
+		getCatsRoute : function(id) {
+			routesFactory.getCategoriesRoute(id)
+				.then(function(response){
+	    			console.log("Reading all the categories of route", response);
+	    			routeHandlerViewModel.catsRoute = response;
+	    		}, function(response){
+	    			console.log("Error reading categories of route", response);
+	    		})
+		},
 		updateRoute : function() {
 			routeHandlerViewModel.functions.setDate();
 
@@ -55,7 +64,7 @@ angular.module('BHikeApp')
 			routesFactory.postRoute(routeHandlerViewModel.route)
 			.then(function(response){
 				console.log("Creating route. Response: ", response);
-					console.log("Cabeceras:",response.headers());
+					console.log("Header:",response.headers());
 					var rTurl=response.headers().location;
 					console.log("Route URL:",rTurl);
 					var rtId = rTurl.substring(rTurl.lastIndexOf('/') + 1);
@@ -116,6 +125,16 @@ angular.module('BHikeApp')
 				console.log("Error deleting route", response);
 			})
 		},
+		checkCats : function(name) {
+			console.log("Checking if category with name", name , "coincides with route category.");
+			for (var i = 0; i < routeHandlerViewModel.catsRoute.length; i++) {
+                if (routeHandlerViewModel.catsRoute[i].name == name) {
+					console.log("Coincides ", name , " with catsRoute: ",routeHandlerViewModel.catsRoute[i].name);
+					return true;
+                }
+			}
+			return false;
+		},
 		routeHandlerSwitcher : function(){
 			if (routeHandlerViewModel.functions.where('/createRoute')){
 				console.log($location.path());
@@ -135,8 +154,15 @@ angular.module('BHikeApp')
 			$location.path('/');
 		}
 	}
-	routeHandlerViewModel.functions.readCategories();
+
    	console.log("Entering routeHandlerCtrl with $routeParams.ID=",$routeParams.ID);
-   	if ($routeParams.ID==undefined) routeHandlerViewModel.functions.readUserNameEmail();
-	   else routeHandlerViewModel.functions.readRoute($routeParams.ID);
+   	if ($routeParams.ID==undefined){
+		routeHandlerViewModel.functions.readUserNameEmail();
+		routeHandlerViewModel.functions.readCategories();
+	}else{
+		routeHandlerViewModel.categories={};
+		routeHandlerViewModel.functions.readRoute($routeParams.ID);
+		routeHandlerViewModel.functions.getCatsRoute($routeParams.ID);
+		routeHandlerViewModel.functions.readCategories();
+	} 
 }]);

@@ -49,10 +49,9 @@ angular.module('BHikeApp')
 					return response;
 				});
 		},
-        //TODO ===================================
         getCategoriesRoute : function(id) {
-    		var urlid = url+ 'TODO' + id;
-            return $http.get(urlid)
+    		var urlCat = url + id + '/categories';
+            return $http.get(urlCat)
             	.then(function(response){
             		return response.data;
          		});

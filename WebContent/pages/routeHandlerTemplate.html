@@ -5,7 +5,7 @@
 		<p class="login_h1" data-ng-if="routeHandlerVM.functions.where('/editRoute/'+routeHandlerVM.route.id)">Replace the information.</p>
 		<p class="login_h1" data-ng-if="routeHandlerVM.functions.where('/createRoute')">Create a new route.</p>
 
-<p>{{routeHandlerVM.categories}}</p>
+<p>{{routeHandlerVM}}</p>
 		<form data-ng-submit="routeHandlerVM.functions.routeHandlerSwitcher()" >
 			<fieldset class="login_field">
 				<input type="text" name="title" class="inputs" placeholder="Route Title" required 
@@ -51,7 +51,7 @@
 					<label for="category" class="route_lab">Category of the route: </label>
 					<div data-ng-repeat="cat in routeHandlerVM.categories">
 						<!-- <input type="checkbox" value="{{ cat.id }}" name="category" > {{ cat.name }} <br>-->
-						<input type="checkbox" data-ng-model="cat.Selected" data-ng-checked="cat.Selected"> {{cat.name}} <br>
+						<input type="checkbox" data-ng-model="cat.Selected" data-ng-checked="routeHandlerVM.functions.checkCats(cat.name)"> {{cat.name}} <br>
 					</div>
 				</fieldset>
 				<label for="difficulty" class="route_lab">Difficulty of the route: </label> 

@@ -23,12 +23,15 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import es.unex.pi.dao.CategoryDAO;
+import es.unex.pi.dao.JDBCCategoryDAOImpl;
 import es.unex.pi.dao.JDBCRouteDAOImpl;
 import es.unex.pi.dao.JDBCRoutesCategoriesDAOImpl;
 import es.unex.pi.dao.JDBCUserDAOImpl;
 import es.unex.pi.dao.RouteDAO;
 import es.unex.pi.dao.RoutesCategoriesDAO;
 import es.unex.pi.dao.UserDAO;
+import es.unex.pi.model.Category;
 import es.unex.pi.model.Route;
 import es.unex.pi.model.RoutesCategories;
 import es.unex.pi.model.User;
@@ -198,11 +201,11 @@ public class RoutesResource {
 	
 		Route route = routeDao.get(routeId);
 		
-		HttpSession sess = context.getSession();
-		User user = (User) sess.getAttribute("user");
+		HttpSession session = context.getSession();
+		User user = (User) session.getAttribute("user");
 		
 		if(user == null) {
-			System.out.println("No session stablished.");
+			System.out.println("No session established.");
 			return Response.status(401).build();
 		}
 		
@@ -228,24 +231,32 @@ public class RoutesResource {
 	}
 
 	@GET
-	@Path("/{routeid: ID}/categories")	  
+	@Path("/{routeId: [0-9]+}/categories")	  
 	@Produces(MediaType.APPLICATION_JSON) 
-	public Response getRouteCategories(@PathParam("routeid") long routeId, @Context HttpServletRequest request) throws Exception { 
+	public List<Category> getRouteCategories(@PathParam("routeId") long routeId, @Context HttpServletRequest request) throws Exception { 
 	  
-		Response res;
 		Connection conn = (Connection) sc.getAttribute("dbConn");
-		RouteDAO routeDao = new JDBCRouteDAOImpl();
-		routeDao.setConnection(conn);
 
-		Route route = routeDao.get(routeId);  
-		  
-		  
-		  
-		res = Response // return 201 and Location: /routes/newid
-				.created(uriInfo.getAbsolutePathBuilder().path(Long.toString(routeId)).build())
-				.contentLocation(uriInfo.getAbsolutePathBuilder().path(Long.toString(routeId)).build()).build();
-		return res;	 
-	  }
+		RoutesCategoriesDAO rtCatDao = new JDBCRoutesCategoriesDAOImpl();
+		rtCatDao.setConnection(conn);
+		CategoryDAO categoryDao = new JDBCCategoryDAOImpl();
+		categoryDao.setConnection(conn);
+		
+		List<RoutesCategories> rtCats = null;
+		rtCats = rtCatDao.getAllByRoute(routeId);
+				
+		if(rtCats == null) {
+			throw new CustomBadRequestException("No session established.");
+		}
+		
+		List<Category> categories = new ArrayList<Category>();
+		
+		for (RoutesCategories rtCt : rtCats) {
+			categories.add(categoryDao.get(rtCt.getIdct()));
+		}
+		
+		return categories;
+	}
 
 	@PUT
 	@Path("/{routeId: [0-9]+}")

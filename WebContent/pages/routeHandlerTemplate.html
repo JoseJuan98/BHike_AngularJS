@@ -51,7 +51,7 @@
 					<label for="category" class="route_lab">Category of the route: </label>
 					<div data-ng-repeat="cat in routeHandlerVM.categories">
 						<!-- <input type="checkbox" value="{{ cat.id }}" name="category" > {{ cat.name }} <br>-->
-						<input type="checkbox" data-ng-model="cat.Selected"> {{cat.name}} <br>
+						<input type="checkbox" data-ng-model="cat.Selected" data-ng-checked="cat.Selected"> {{cat.name}} <br>
 					</div>
 				</fieldset>
 				<label for="difficulty" class="route_lab">Difficulty of the route: </label> 
@@ -72,7 +72,7 @@
 				<input name="sub_log" type="submit" class="butt_log" value="Delete" data-ng-show="routeHandlerVM.functions.where('/deleteRoute/'+routeHandlerVM.route.id)">
 				<input name="sub_log" type="submit" class="butt_log" value="Create Route" data-ng-show="routeHandlerVM.functions.where('/createRoute')">
 				
-				<a class="cancel_c" href="#!/" data-ng-show="routeHandlerVM.functions.where(!'/deleteRoute/'+routeHandlerVM.route.id)"> Cancel </a>
+				<a class="cancel_c" href="#!/" data-ng-show="!routeHandlerVM.functions.where('/deleteRoute/'+routeHandlerVM.route.id)"> Cancel </a>
 				<a class="cancel_c" href="#!/editRoute/{{routeHandlerVM.route.id}}" data-ng-show="routeHandlerVM.functions.where('/deleteRoute/'+routeHandlerVM.route.id)"> Cancel </a>
 			</div>
 

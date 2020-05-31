@@ -14,6 +14,6 @@
 		<p>Kudos - {{route.kudos}}</p>
 		<p class="see">
 			<a class="logout_home" href="#!/seeRoute/{{route.id}}" > See </a>
-			<a class="logout_home" href="#!/editRoute/{{route.id}}" > Edit </a>
+			<a class="logout_home" href="#!/editRoute/{{route.id}}" data-ng-show="route.idu == head.user.id"> Edit </a>
 		</p>
 

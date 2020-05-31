@@ -40,6 +40,8 @@ angular.module('BHikeApp')
 		updateRoute : function() {
 			routeHandlerViewModel.functions.setDate();
 
+			
+
 			routesFactory.putRoute(routeHandlerViewModel.route)
 				.then(function(response){
 					console.log("Updating route with id:",routeHandlerViewModel.route.id," Response:", response);
@@ -57,9 +59,7 @@ angular.module('BHikeApp')
 					var rTurl=response.headers().location;
 					console.log("Route URL:",rTurl);
 					var rtId = rTurl.substring(rTurl.lastIndexOf('/') + 1);
-
 					console.log("Route ID is: ", rtId);
-
 				return routeHandlerViewModel.functions.setCategories(rtId);
 			},function(response){
 				console.log("Error creating route");

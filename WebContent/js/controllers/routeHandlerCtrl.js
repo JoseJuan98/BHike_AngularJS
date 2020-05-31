@@ -2,8 +2,10 @@ angular.module('BHikeApp')
 .controller('routeHandlerCtrl', ['routesFactory','usersFactory','categoriesFactory','$routeParams','$location',function(routesFactory,usersFactory,categoriesFactory,$routeParams,$location){
 	var routeHandlerViewModel = this;
 	routeHandlerViewModel.route={};
+	routeHandlerViewModel.userSession={};
 	routeHandlerViewModel.categories=[];
 	routeHandlerViewModel.catsRoute=[];
+	routeHandlerViewModel.confirmPassw={};
    	routeHandlerViewModel.functions = {
    		where : function(route){
    			return $location.path() == route;
@@ -11,8 +13,7 @@ angular.module('BHikeApp')
 		readUserNameEmail : function() {
 			usersFactory.getUser()
 				.then(function(response){
-					routeHandlerViewModel.route.username= response.username;
-					routeHandlerViewModel.route.email= response.email;
+					routeHandlerViewModel.userSession= response;
 					console.log("Reading user with id: ",response.id," Response: ", response);
     			}, function(response){
     				console.log("Error reading user data",response);
@@ -116,12 +117,17 @@ angular.module('BHikeApp')
 			routeHandlerViewModel.route.date = (routeHandlerViewModel.route.dateSimple+" "+routeHandlerViewModel.route.timeSimple);
 		},
 		deleteRoute : function(id) {
-			routesFactory.deleteRoute(id)
-			.then(function(response){
-				console.log("Deleting route. Response:", response);
-			},function(response){
-				console.log("Error deleting route", response);
-			})
+			if(routeHandlerViewModel.userSession.password != routeHandlerViewModel.confirmPassw){
+				alert("The passwords doesn't coincide");
+			}else{
+				routesFactory.deleteRoute(id)
+				.then(function(response){
+					console.log("Deleting route. Response:", response);
+					$location.path('/');
+				},function(response){
+					console.log("Error deleting route", response);
+				})
+			}
 		},
 		checkCats : function(name) {
 			for (var i = 0; i < routeHandlerViewModel.catsRoute.length; i++) {
@@ -135,19 +141,22 @@ angular.module('BHikeApp')
 			if (routeHandlerViewModel.functions.where('/createRoute')){
 				console.log($location.path());
 				routeHandlerViewModel.functions.createRoute();
+				$location.path('/');
 			}
 			else if (routeHandlerViewModel.functions.where('/editRoute/'+routeHandlerViewModel.route.id)){
 				console.log($location.path());
 				routeHandlerViewModel.functions.updateRoute();
+				$location.path('/');
 			}
 			else if (routeHandlerViewModel.functions.where('/deleteRoute/'+routeHandlerViewModel.route.id)){
 				console.log($location.path());
 				routeHandlerViewModel.functions.deleteRoute(routeHandlerViewModel.route.id);
 			}
 			else {
-			console.log($location.path());
+				console.log($location.path());
+				$location.path('/');
 			}
-			$location.path('/');
+			
 		}
 	}
 
@@ -157,6 +166,7 @@ angular.module('BHikeApp')
 		routeHandlerViewModel.functions.readCategories();
 	}else{
 		routeHandlerViewModel.categories={};
+		routeHandlerViewModel.functions.readUserNameEmail();
 		routeHandlerViewModel.functions.readRoute($routeParams.ID);
 		routeHandlerViewModel.functions.getCatsRoute($routeParams.ID);
 		routeHandlerViewModel.functions.readCategories();

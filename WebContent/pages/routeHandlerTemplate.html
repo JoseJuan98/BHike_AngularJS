@@ -1,11 +1,11 @@
 <div class="div_settings">
+<p>{{routeHandlerVM}}</p>
 		<h1 class="sett_h1">BHike</h1>
 		<p id="error_log" class="login_field"></p>
 		<p class="login_h1" data-ng-if="routeHandlerVM.functions.where('/deleteRoute/'+routeHandlerVM.route.id)">Confirm password to proceed.</p>
 		<p class="login_h1" data-ng-if="routeHandlerVM.functions.where('/editRoute/'+routeHandlerVM.route.id)">Replace the information.</p>
 		<p class="login_h1" data-ng-if="routeHandlerVM.functions.where('/createRoute')">Create a new route.</p>
 
-<p>{{routeHandlerVM}}</p>
 		<form data-ng-submit="routeHandlerVM.functions.routeHandlerSwitcher()" >
 			<fieldset class="login_field">
 				<input type="text" name="title" class="inputs" placeholder="Route Title" required 
@@ -65,6 +65,8 @@
 					<option value="3" data-ng-show="routeHandlerVM.functions.where('/createRoute')"> Difficult </option>
 				</select>
 
+				<input type="password" data-ng-model="routeHandlerVM.confirmPassw" class="inputs" placeholder="Confirm Password to proceed" required data-ng-show="routeHandlerVM.functions.where('/deleteRoute/'+routeHandlerVM.route.id)">
+				<br>
 
 			</fieldset>
 			<div class="create_us">
@@ -74,9 +76,10 @@
 				
 				<a class="cancel_c" href="#!/" data-ng-show="!routeHandlerVM.functions.where('/deleteRoute/'+routeHandlerVM.route.id)"> Cancel </a>
 				<a class="cancel_c" href="#!/editRoute/{{routeHandlerVM.route.id}}" data-ng-show="routeHandlerVM.functions.where('/deleteRoute/'+routeHandlerVM.route.id)"> Cancel </a>
+				<br>
+				<br>
+				<a class="delete_account" href="#!/deleteRoute/{{routeHandlerVM.route.id}}" data-ng-show="routeHandlerVM.functions.where('/editRoute/'+routeHandlerVM.route.id)"> Delete Route </a>
 			</div>
-
 		</form>
-	
-	</div>
+</div>
 

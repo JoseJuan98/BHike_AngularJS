@@ -27,13 +27,12 @@
             </fieldset>
             <div class="create_us">
                 <input name="sub_log" type="submit" class="butt_log" value="Login">
-                <p> You don't have an account? <a href="CreateUser"> Create one </a> </p>
+                <p> You don't have an account? <a href="<c:url value='CreateUserServlet.do'/>"> Create one </a> </p>
             </div>
 
         </form>
-		<a class="login_home" href="mainPageServlet.do">Main Page</a>
-			<br>
-			<p></p>
+		<!--  <a class="login_home" href="mainPageServlet.do">Main Page</a>  -->
+		<br>
     </div>
 </body>
 

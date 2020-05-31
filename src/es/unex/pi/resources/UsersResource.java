@@ -39,12 +39,10 @@ public class UsersResource {
 		
 		logger.info("Getting USER by DAO with username = "+ user.getUsername());
 				
-		User returnUser =userDao.get(user.getId());
-		returnUser.setPassword("**********");
-		
+		//User returnUser = userDao.get(user.getId());
 		logger.info("Getting USER for REST with username = "+ user.getUsername());
 		
-		return returnUser; 
+		return user; 
 	  }
 	  
 	  @GET

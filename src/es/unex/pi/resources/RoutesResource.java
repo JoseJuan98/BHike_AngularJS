@@ -11,6 +11,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -247,7 +248,7 @@ public class RoutesResource {
 	@PUT
 	@Path("/{routeId: [0-9]+}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response put(Route routeUpdate, @PathParam("routeId") long routeId, @Context HttpServletRequest request)
+	public Response putRoute(Route routeUpdate, @PathParam("routeId") long routeId, @Context HttpServletRequest request)
 			throws Exception {
 		Connection conn = (Connection) sc.getAttribute("dbConn");
 		RouteDAO routeDao = new JDBCRouteDAOImpl();
@@ -281,5 +282,25 @@ public class RoutesResource {
 			throw new WebApplicationException(Response.Status.NOT_FOUND);
 
 		return response;
+	}
+	
+	@DELETE
+	@Path("/{routeId: [0-9]+}")	  
+	public Response deleteRoute(@PathParam("routeId") long routeId,
+			  					 @Context HttpServletRequest request) {		  
+		Connection conn = (Connection) sc.getAttribute("dbConn");
+		RouteDAO routeDao = new JDBCRouteDAOImpl();
+		routeDao.setConnection(conn);
+		
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+		
+		Route route = routeDao.get(routeId);
+		if ((route != null) && (user.getId() == route.getIdu())){
+			routeDao.delete(routeId);
+					return Response.noContent().build(); //204 no content 
+		}
+		else throw new CustomBadRequestException("Error in user or id");		
+			
 	}
 }

@@ -7,7 +7,7 @@ angular.module('BHikeApp')
               	.then(function(response){
         			 return response.data;
                	});
-    	}			
+		}			
     }
     return catsInterface;
 }])

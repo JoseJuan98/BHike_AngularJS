@@ -52,16 +52,30 @@ angular.module('BHikeApp')
 
 			routesFactory.postRoute(routeHandlerViewModel.route)
 			.then(function(response){
-				console.log("Creating route. Headers:", response);
-				return routeHandlerViewModel.functions.setCategories(routeHandlerViewModel.route.id);
+				console.log("Creating route. Response: ", response);
+					console.log("Cabeceras:",response.headers());
+					var rTurl=response.headers().location;
+					console.log("Route URL:",rTurl);
+					var rtId = rTurl.substring(rTurl.lastIndexOf('/') + 1);
+
+					console.log("Route ID is: ", rtId);
+
+				return routeHandlerViewModel.functions.setCategories(rtId);
 			},function(response){
 				console.log("Error creating route");
 			})			
 		},
 		setCategories : function(routeId) {
+			console.log("Setting categories of route");
 	        for (var i = 0; i < routeHandlerViewModel.categories.length; i++) {
                 if (routeHandlerViewModel.categories[i].Selected) {
-                    console.log("routeId: ", routeId, " .Route name ",routeHandlerViewModel.categories[i].name);
+					console.log("routeId: ", routeId, " .Route name ",routeHandlerViewModel.categories[i].name);
+					routesFactory.setCategoryToRt(routeId, routeHandlerViewModel.categories[i].id)
+						.then(function(response){
+							console.log("Category",routeHandlerViewModel.categories[i].id," set to route with id",routeID ,". Response Status:",response.status);
+						}, function(response){
+							console.log("Error updating route", response);
+						})
                 }
             }
 		},

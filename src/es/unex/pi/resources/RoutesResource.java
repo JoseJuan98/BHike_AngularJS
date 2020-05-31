@@ -23,9 +23,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-import es.unex.giiis.pi.dao.JDBCRouteDAOImpl;
-import es.unex.giiis.pi.dao.RouteDAO;
-import es.unex.giiis.pi.model.Route;
 import es.unex.pi.dao.JDBCRouteDAOImpl;
 import es.unex.pi.dao.JDBCRoutesCategoriesDAOImpl;
 import es.unex.pi.dao.JDBCUserDAOImpl;
@@ -145,12 +142,12 @@ public class RoutesResource {
 				}
 			}
 		}
-		System.out.println("Route before modiying anything : "+ route.toString());
+		System.out.println("Route before modiying anything : " + route.toString());
 		route.setIdu(user.getId());
 		route.setBlocked(0); // By default they are available
 		route.setKudos(0);
 		route.setDate(route.getDateSimple().concat(" " + route.getTimeSimple()));
-		System.err.println("Route after changing things: "+route.toString());
+		System.err.println("Route after changing things: " + route.toString());
 
 		Response res;
 
@@ -186,56 +183,71 @@ public class RoutesResource {
 		return res;
 	}
 
-	/*
-	 * @POST
-	 * 
-	 * @Path("/{routeid: ID}/categories")
-	 * 
-	 * @Consumes(MediaType.APPLICATION_JSON) public Response
-	 * postRouteCategories(@PathParam("routeid") long routeid, @Context
-	 * HttpServletRequest request) throws Exception { Connection conn = (Connection)
-	 * sc.getAttribute("dbConn");
-	 * 
-	 * Response res;
-	 * 
-	 * 
-	 * 
-	 * 
-	 * res = Response //return 201 and Location: /routes/newid .created(
-	 * uriInfo.getAbsolutePathBuilder() .path(Long.toString(routeid)) .build())
-	 * .contentLocation( uriInfo.getAbsolutePathBuilder()
-	 * .path(Long.toString(routeid)) .build()) .build(); return res;
-	 * 
-	 * }
-	 */
-	  @PUT
-	  @Path("/{routeId: [0-9]+}")
-	  @Consumes(MediaType.APPLICATION_JSON)
-	  public Response put(Route routeUpdate,
-							@PathParam("routeId") long routeId,
-							@Context HttpServletRequest request) throws Exception{
-		  Connection conn = (Connection)sc.getAttribute("dbConn");
-		  RouteDAO routeDao = new JDBCRouteDAOImpl();
-		  routeDao.setConnection(conn);
+	@POST
+	@Path("/{routeId: [0-9]+}/categories/{catId: [0-9]+}")
+	public Response createCategoryChollo(@Context HttpServletRequest context, @PathParam("catId") long catId,
+			@PathParam("routeId") long routeId) {
+		
+	Response res;
+	Connection conn = (Connection) sc.getAttribute("dbConn");
+	RouteDAO routeDao = new JDBCRouteDAOImpl();
+	routeDao.setConnection(conn);
+
+	Route route = routeDao.get(routeId);
+	
+	
+	
+	res = Response // return 201 and Location: /routes/newid
+			.created(uriInfo.getAbsolutePathBuilder().path(Long.toString(routeId)).build())
+			.contentLocation(uriInfo.getAbsolutePathBuilder().path(Long.toString(routeId)).build()).build();
+	return res;	
+	}
+
+	@GET
+	@Path("/{routeid: ID}/categories")	  
+	@Produces(MediaType.APPLICATION_JSON) 
+	public Response getRouteCategories(@PathParam("routeid") long routeId, @Context HttpServletRequest request) throws Exception { 
+	  
+		Response res;
+		Connection conn = (Connection) sc.getAttribute("dbConn");
+		RouteDAO routeDao = new JDBCRouteDAOImpl();
+		routeDao.setConnection(conn);
+
+		Route route = routeDao.get(routeId);  
 		  
-		  HttpSession session = request.getSession();
-		  User user = (User) session.getAttribute("user");
-			
-		  Response response = null;
-					
-		  //We check that the route exists
-		  Route route = routeDao.get(routeUpdate.getId());
-		  if ((route != null) && (user.getId() == route.getIdu())){
-					if (route.getId()!=routeId) throw new CustomBadRequestException("Error in id");
-					else 
-					{
-						Map<String, String> messages = new HashMap<String, String>();
-						if (routeUpdate.validate(messages)) routeDao.save(routeUpdate);						
-						else throw new CustomBadRequestException("Errors in parameters");						
-					}
-				}
-		  else throw new WebApplicationException(Response.Status.NOT_FOUND);			
 		  
-		  return response;
+		  
+		res = Response // return 201 and Location: /routes/newid
+				.created(uriInfo.getAbsolutePathBuilder().path(Long.toString(routeId)).build())
+				.contentLocation(uriInfo.getAbsolutePathBuilder().path(Long.toString(routeId)).build()).build();
+		return res;	 
+	  }
+
+	@PUT
+	@Path("/{routeId: [0-9]+}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response put(Route routeUpdate, @PathParam("routeId") long routeId, @Context HttpServletRequest request)
+			throws Exception {
+		Connection conn = (Connection) sc.getAttribute("dbConn");
+		RouteDAO routeDao = new JDBCRouteDAOImpl();
+		routeDao.setConnection(conn);
+
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+
+		Response response = null;
+
+		// We check that the route exists
+		Route route = routeDao.get(routeUpdate.getId());
+		if ((route != null) && (user.getId() == route.getIdu())) {
+			if (route.getId() != routeId)
+				throw new CustomBadRequestException("Error in id");
+			else {
+				routeDao.save(routeUpdate);
+			}
+		} else
+			throw new WebApplicationException(Response.Status.NOT_FOUND);
+
+		return response;
 	}
 }

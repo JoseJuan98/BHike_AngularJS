@@ -42,6 +42,13 @@ angular.module('BHikeApp')
       				 return response.status;
   				}); 
         },
+		setCategoryToRt : function(rtId,catId) {
+			urlCats = url + '/cat';
+			return $http.post(urlCats,rtId,catId)
+				.then(function(response){
+					return response.status;
+				});
+		},
         //TODO ===================================
         getCategoriesRoute : function(id) {
     		var urlid = url+ 'TODO' + id;

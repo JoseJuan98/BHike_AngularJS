@@ -30,6 +30,7 @@ import es.unex.pi.dao.RouteDAO;
 import es.unex.pi.dao.RoutesCategoriesDAO;
 import es.unex.pi.dao.UserDAO;
 import es.unex.pi.model.Route;
+import es.unex.pi.model.RoutesCategories;
 import es.unex.pi.model.User;
 import es.unex.pi.resources.exceptions.CustomBadRequestException;
 import es.unex.pi.resources.exceptions.CustomNotFoundException;
@@ -185,22 +186,45 @@ public class RoutesResource {
 
 	@POST
 	@Path("/{routeId: [0-9]+}/categories/{catId: [0-9]+}")
-	public Response createCategoryChollo(@Context HttpServletRequest context, @PathParam("catId") long catId,
-			@PathParam("routeId") long routeId) {
+	public Response createCategoryRoute(@Context HttpServletRequest context, @PathParam("catId") long catId,
+		@PathParam("routeId") long routeId) {		
 		
-	Response res;
-	Connection conn = (Connection) sc.getAttribute("dbConn");
-	RouteDAO routeDao = new JDBCRouteDAOImpl();
-	routeDao.setConnection(conn);
-
-	Route route = routeDao.get(routeId);
+		Response res;
+		Connection conn = (Connection) sc.getAttribute("dbConn");
+		RouteDAO routeDao = new JDBCRouteDAOImpl();
+		routeDao.setConnection(conn);
+		RoutesCategoriesDAO rtCatDao = new JDBCRoutesCategoriesDAOImpl();
+		rtCatDao.setConnection(conn);
 	
-	
-	
-	res = Response // return 201 and Location: /routes/newid
-			.created(uriInfo.getAbsolutePathBuilder().path(Long.toString(routeId)).build())
-			.contentLocation(uriInfo.getAbsolutePathBuilder().path(Long.toString(routeId)).build()).build();
-	return res;	
+		Route route = routeDao.get(routeId);
+		
+		HttpSession sess = context.getSession();
+		User user = (User) sess.getAttribute("user");
+		
+		if(user == null) {
+			System.out.println("No session stablished.");
+			return Response.status(401).build();
+		}
+		
+		if (route == null || user.getId() != route.getIdu()) {
+			System.out.println("Wrong route.");
+			return Response.status(401).build();
+		}
+		
+		if(rtCatDao.get(routeId, catId) != null) {
+			return Response.status(400).build();
+		}
+		
+		RoutesCategories rtCat = new RoutesCategories();
+		rtCat.setIdr(routeId);
+		rtCat.setIdct(catId);
+		
+		rtCatDao.add(rtCat);
+		
+		res = Response // return 201 and Location: /routes/newid
+				.created(uriInfo.getAbsolutePathBuilder().path(Long.toString(routeId)).build())
+				.contentLocation(uriInfo.getAbsolutePathBuilder().path(Long.toString(routeId)).build()).build();
+		return res;	
 	}
 
 	@GET

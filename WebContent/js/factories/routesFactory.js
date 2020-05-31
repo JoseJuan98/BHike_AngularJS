@@ -43,10 +43,10 @@ angular.module('BHikeApp')
   				}); 
         },
 		setCategoryToRt : function(rtId,catId) {
-			urlCats = url + '/cat';
-			return $http.post(urlCats,rtId,catId)
+			urlCats = url + rtId + '/categories/' + catId;
+			return $http.post(urlCats)
 				.then(function(response){
-					return response.status;
+					return response;
 				});
 		},
         //TODO ===================================

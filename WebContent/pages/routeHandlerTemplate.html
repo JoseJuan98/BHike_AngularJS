@@ -5,7 +5,7 @@
 		<p class="login_h1" data-ng-if="routeHandlerVM.functions.where('/editRoute/'+routeHandlerVM.route.id)">Replace the information.</p>
 		<p class="login_h1" data-ng-if="routeHandlerVM.functions.where('/createRoute')">Create a new route.</p>
 
-
+<p>{{routeHandlerVM.categories}}</p>
 		<form data-ng-submit="routeHandlerVM.functions.routeHandlerSwitcher()" >
 			<fieldset class="login_field">
 				<input type="text" name="title" class="inputs" placeholder="Route Title" required 

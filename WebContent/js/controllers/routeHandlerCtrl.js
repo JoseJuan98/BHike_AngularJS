@@ -69,10 +69,10 @@ angular.module('BHikeApp')
 			console.log("Setting categories of route");
 	        for (var i = 0; i < routeHandlerViewModel.categories.length; i++) {
                 if (routeHandlerViewModel.categories[i].Selected) {
-					console.log("routeId: ", routeId, " .Route name ",routeHandlerViewModel.categories[i].name);
+					console.log("routeId: ", routeId, " .Category name ",routeHandlerViewModel.categories[i].name, "cat Id ", routeHandlerViewModel.categories[i].id);
 					routesFactory.setCategoryToRt(routeId, routeHandlerViewModel.categories[i].id)
 						.then(function(response){
-							console.log("Category",routeHandlerViewModel.categories[i].id," set to route with id",routeID ,". Response Status:",response.status);
+							console.log("Category, set to route. Response Status:",response.status);
 						}, function(response){
 							console.log("Error updating route", response);
 						})

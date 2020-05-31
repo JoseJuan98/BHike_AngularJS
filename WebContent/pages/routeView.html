@@ -5,16 +5,16 @@
 		data-ng-include="'include/routeEditDisplay.htm'">
 
 
-		<div class="Nowner_imgView_div" data-ng-show=" route.idu != userRt.id "
+		<div class="Nowner_imgView_div" data-ng-show=" route.idu != head.user.id "
 			data-ng-include="'include/routeImg.htm'"></div>
-		<div class="rtView_img_div" data-ng-show=" route.idu == userRt.id" data-ng-include="'include/routeImg.htm'">
+		<div class="rtView_img_div" data-ng-show=" route.idu == head.user.id" data-ng-include="'include/routeImg.htm'">
 
 		</div>
 		<h4 class="title_us_View">{{route.title}}</h4>
-		<div class="rtView_info_div" data-ng-show=" route.idu != userRt.id " data-ng-include="'routeFrame.htm'">
+		<div class="rtView_info_div" data-ng-show=" route.idu != head.user.id " data-ng-include="'routeFrame.htm'">
 
 		</div>
-		<div class="rtView_info_div_Owner" data-ng-show=" route.idu == userRt.id " data-ng-include="'routeFrame.htm'">
+		<div class="rtView_info_div_Owner" data-ng-show=" route.idu == head.user.id " data-ng-include="'routeFrame.htm'">
 
 		</div>
 		<div class="kudo_div_View"></div>

@@ -47,7 +47,6 @@ angular.module('BHikeApp')
 	    		})
 		},
 		updateRoute : function() {
-			routeHandlerViewModel.functions.setDate();
 
 			routesFactory.putRoute(routeHandlerViewModel.route)
 				.then(function(response){

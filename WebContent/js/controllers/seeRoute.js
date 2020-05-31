@@ -1,19 +1,29 @@
 angular.module('BHikeApp')
-.controller('seeRouteCtrl', ['routesFactory','$routeParams','$location',function(routesFactory,$routeParams,$location){
-    var mapViewModel = this;
-    mapViewModel.routes= new Map();
-    mapViewModel.functions = {
-    	readRoutes : function() {
-    		routesFactory.getRoutesByUser()
+.controller('seeRouteCtrl', ['usersFactory','routesFactory','$routeParams','$location',function(usersFactory,routesFactory,$routeParams,$location){
+    var routeViewModel = this;
+	routeViewModel.route={};
+	routeViewModel.user={};
+    routeViewModel.functions = {
+    	readRoute : function(id) {
+    		routesFactory.getRoute(id)
     			.then(function(response){
-	    			console.log("Reading all the routes: ", response);
-	    			mapViewModel.routes = response;
+	    			console.log("Reading route with id: ", id);
+					routeViewModel.route = response;
+					return routeViewModel.functions.readUser(routeViewModel.route.idu);
+	    		}, function(response){
+	    			console.log("Error reading routes");
+	    		})
+		},
+		readUser : function(id) {
+			usersFactory.getUserById(id)
+			.then(function(response){
+	    			console.log("Reading route with id: ", id);
+					routeViewModel.route = response;
 	    		}, function(response){
 	    			console.log("Error reading routes");
 	    		})
 		}
     }
-	mapViewModel.functions.readRoutes();
 	if ($routeParams.ID==undefined) $location.path('/');
-	else routeHandlerViewModel.functions.readRoute($routeParams.ID);
+	else routeViewModel.functions.readRoute($routeParams.ID);
 }])

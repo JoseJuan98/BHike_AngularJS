@@ -8,7 +8,14 @@ angular.module('BHikeApp')
               	.then(function(response){
         			 return response.data;
                	});
-    	}			
+		},
+		getUserById : function(id){
+    		urlid = url + id;
+            return $http.get(urlid)
+              	.then(function(response){
+        			 return response.data;
+               	});
+    	}		
     }
     return usersInterface;
 }])

@@ -1,9 +1,9 @@
-		<h3 data-ng-show=" route.idu != userRt.id "> {{userRt.username}} | {{userRt.email}}</h3>
+		<h3 data-ng-show=" route.idu != head.user.id "> {{seeRouteVM.user.username}} | {{seeRouteVM.user.email}}</h3>
 		<br>
 		<br>
 
 
-		<div class="block_editRt" data-ng-show=" route.idu != userRt.id ">
+		<div class="block_editRt" data-ng-show=" route.idu != head.user.id ">
 			<a class="logout_home" href="#!/EditRoute/{{route.id}}">Edit</a>
 
 			<a class="route_bl" data-ng-show=" route.blocked == 1 " href="#!/UnBlockRoute/{{route.id}}"> Unblock Route

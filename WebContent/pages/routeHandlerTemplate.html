@@ -36,8 +36,8 @@
 					<div class="datetime">
 						<label for="date" class="route_lab">Date and time of start.</label>
 						<div class="date_div">
-							<input type="date" name="date" id="date_route" class="inputs" placeholder="yyyy-MM-dd" value="{{ routeHandlerVM.route.dateSimple }}" data-ng-model="routeHandlerVM.route.dateSimple" data-ng-readonly="routeHandlerVM.functions.where('/deleteRoute/'+routeHandlerVM.route.id)" >
-							<input type="time" name="time" class="inputs" id="time_route" placeholder="HH:mm"  value="{{ routeHandlerVM.route.timeSimple }}" data-ng-model="routeHandlerVM.route.timeSimple" data-ng-readonly="routeHandlerVM.functions.where('/deleteRoute/'+routeHandlerVM.route.id)" >
+							<input type="date" name="date" id="date_route" class="inputs" placeholder="yyyy-MM-dd" value="{{ routeHandlerVM.route.dateSimple }}" data-ng-model="routeHandlerVM.route.dateSimple" data-ng-readonly="!routeHandlerVM.functions.where('/createRoute')" >
+							<input type="time" name="time" class="inputs" id="time_route" placeholder="HH:mm"  value="{{ routeHandlerVM.route.timeSimple }}" data-ng-model="routeHandlerVM.route.timeSimple" data-ng-readonly="!routeHandlerVM.functions.where('/createRoute')" >
 						</div>
 					</div>
 				</div>

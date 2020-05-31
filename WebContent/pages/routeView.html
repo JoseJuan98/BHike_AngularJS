@@ -1,31 +1,32 @@
+{{seeRouteVM}}
 <div class="rtView_box">
-	<div class="rtView" data-ng-show=" route.blocked != 1 " data-ng-include="'include/routeEditDisplay.htm'">
+	<div class="rtView" data-ng-show=" seeRouteVM.route.blocked != 1 " data-ng-include="'include/routeEditDisplay.htm'">
 	</div>
-	<div class="rtView" data-ng-show=" route.blocked == 1 " id="block_div"
+	<div class="rtView" data-ng-show=" seeRouteVM.route.blocked == 1 " id="block_div"
 		data-ng-include="'include/routeEditDisplay.htm'">
 
 
-		<div class="Nowner_imgView_div" data-ng-show=" route.idu != head.user.id "
+		<div class="Nowner_imgView_div" data-ng-show=" seeRouteVM.route.idu != head.user.id "
 			data-ng-include="'include/routeImg.htm'"></div>
-		<div class="rtView_img_div" data-ng-show=" route.idu == head.user.id" data-ng-include="'include/routeImg.htm'">
+		<div class="rtView_img_div" data-ng-show=" seeRouteVM.route.idu == head.user.id" data-ng-include="'include/routeImg.htm'">
 
 		</div>
-		<h4 class="title_us_View">{{route.title}}</h4>
-		<div class="rtView_info_div" data-ng-show=" route.idu != head.user.id " data-ng-include="'routeFrame.htm'">
+		<h4 class="title_us_View">{{seeRouteVM.route.title}}</h4>
+		<div class="rtView_info_div" data-ng-show=" seeRouteVM.route.idu != head.user.id " data-ng-include="'routeFrame.htm'">
 
 		</div>
-		<div class="rtView_info_div_Owner" data-ng-show=" route.idu == head.user.id " data-ng-include="'routeFrame.htm'">
+		<div class="rtView_info_div_Owner" data-ng-show=" seeRouteVM.route.idu == head.user.id " data-ng-include="'routeFrame.htm'">
 
 		</div>
 		<div class="kudo_div_View"></div>
 		<div class="kudo_icon">
-			<a href="GiveKudo/{{route.id}}"><img class="kud_img" alt="Like Kudo"
+			<a href="GiveKudo/{{seeRouteVM.route.id}}"><img class="kud_img" alt="Like Kudo"
 					src="../img/heart.svg"> </a>
 		</div>
 		<div class="kudo_icon">
-			<a href="<#!/DisKudo/{{route.id}}"><img class="kud_img" alt="Dislike Kudo"
+			<a href="<#!/DisKudo/{{seeRouteVM.route.id}}"><img class="kud_img" alt="Dislike Kudo"
 					src="../img/dislike.svg"> </a>
 		</div>
-		<p>{{route.kudos}}</p>
+		<p>{{seeRouteVM.route.kudos}}</p>
 	</div>
 </div>

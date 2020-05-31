@@ -167,20 +167,6 @@ public class RoutesResource {
 
 		long id = routeDao.add(route);
 
-		/*
-		 * String[] cat = request.getParameterValues("category");
-		 * System.out.println("Categories array" + cat.toString());
-		 * 
-		 * if (cat != null) { int i = 0; RoutesCategories rc = new RoutesCategories();
-		 * while (i < cat.length) { rc.setIdct(Long.parseLong(cat[i])); rc.setIdr(id);
-		 * routCatDao.add(rc);
-		 * 
-		 * i++; } route = null; // session.setAttribute("routeID", routeID); } else {
-		 * routeDao.delete(id); throw new
-		 * CustomBadRequestException("Please select a category. Categories "+
-		 * ". Array var" + cat.toString()); }
-		 */
-
 		res = Response // return 201 and Location: /routes/newid
 				.created(uriInfo.getAbsolutePathBuilder().path(Long.toString(id)).build())
 				.contentLocation(uriInfo.getAbsolutePathBuilder().path(Long.toString(id)).build()).build();
@@ -266,6 +252,9 @@ public class RoutesResource {
 		Connection conn = (Connection) sc.getAttribute("dbConn");
 		RouteDAO routeDao = new JDBCRouteDAOImpl();
 		routeDao.setConnection(conn);
+		
+		RoutesCategoriesDAO rtCatDao = new JDBCRoutesCategoriesDAOImpl();
+		rtCatDao.setConnection(conn);
 
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
@@ -276,9 +265,17 @@ public class RoutesResource {
 		Route route = routeDao.get(routeUpdate.getId());
 		if ((route != null) && (user.getId() == route.getIdu())) {
 			if (route.getId() != routeId)
-				throw new CustomBadRequestException("Error in id");
+				throw new CustomBadRequestException("Error in id.");
 			else {
+				routeUpdate.setIdu(route.getIdu());
+				routeUpdate.setBlocked(route.getBlocked()); // By default they are available
+				routeUpdate.setKudos(route.getKudos());
+				routeUpdate.setDate(route.getDateSimple().concat(" " + route.getTimeSimple()));
+				System.out.println("Route after changing things: " + route.toString());
+				
 				routeDao.save(routeUpdate);
+				
+				rtCatDao.deleteByRoute(routeUpdate.getId());
 			}
 		} else
 			throw new WebApplicationException(Response.Status.NOT_FOUND);

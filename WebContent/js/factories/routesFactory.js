@@ -26,7 +26,7 @@ angular.module('BHikeApp')
     		var urlid = url+route.id;
             return $http.put(urlid, route)
             	.then(function(response){
-      				 return response.status;
+      				 return response;
   				});                   
     	},
     	postRoute : function(route){
@@ -39,7 +39,7 @@ angular.module('BHikeApp')
     		var urlid = url+id;
             return $http.delete(urlid)
             	.then(function(response){
-      				 return response.status;
+      				 return response;
   				}); 
         },
 		setCategoryToRt : function(rtId,catId) {

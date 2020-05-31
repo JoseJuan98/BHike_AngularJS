@@ -10,7 +10,7 @@
 			<fieldset class="login_field">
 				<input type="text" name="title" class="inputs" placeholder="Route Title" required 
 					data-ng-model="routeHandlerVM.route.title" 
-					data-ng-readonly="routeHandlerVM.functions.where(!'/createRoute')">
+					data-ng-readonly="!routeHandlerVM.functions.where('/createRoute')">
 					<br>
 				<input type="text" name="desc" class="inputs" placeholder="Description" required data-ng-model="routeHandlerVM.route.description"
 					data-ng-readonly="routeHandlerVM.functions.where('/deleteRoute/'+routeHandlerVM.route.id)">

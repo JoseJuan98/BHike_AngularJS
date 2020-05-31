@@ -49,11 +49,10 @@ angular.module('BHikeApp')
 		updateRoute : function() {
 			routeHandlerViewModel.functions.setDate();
 
-			
-
 			routesFactory.putRoute(routeHandlerViewModel.route)
 				.then(function(response){
 					console.log("Updating route with id:",routeHandlerViewModel.route.id," Response:", response);
+				return routeHandlerViewModel.functions.setCategories($routeParams.ID);
     			}, function(response){
     				console.log("Error updating route", response);
     			})
@@ -126,10 +125,8 @@ angular.module('BHikeApp')
 			})
 		},
 		checkCats : function(name) {
-			console.log("Checking if category with name", name , "coincides with route category.");
 			for (var i = 0; i < routeHandlerViewModel.catsRoute.length; i++) {
-                if (routeHandlerViewModel.catsRoute[i].name == name) {
-					console.log("Coincides ", name , " with catsRoute: ",routeHandlerViewModel.catsRoute[i].name);
+                if (routeHandlerViewModel.catsRoute[i].name == name) {					
 					return true;
                 }
 			}

@@ -15,7 +15,9 @@ angular.module('BHikeApp')
               	.then(function(response){
         			 return response.data;
                	});
-    	}		
+		}	
+		//TODO Update =====================
+		//TODO Delete =====================	
     }
     return usersInterface;
 }])

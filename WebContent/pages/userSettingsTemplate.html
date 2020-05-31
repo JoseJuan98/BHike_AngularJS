@@ -1,0 +1,36 @@
+<div class="div_settings">
+	<h1 class="sett_h1">BHike</h1>
+	<p id="error_log" class="login_field">{{ userHandlerVM }}</p>
+
+	<p class="login_h1" data-ng-show="userHandlerVM.functions.where('/deleteUser/'+userHandlerVM.user.id)"> Replace the field to change and confirm password. </p>
+	<p class="login_h1" data-ng-show="userHandlerVM.functions.where('/editUser/'+userHandlerVM.user.id)"> Confirm password to proceed. </p>
+	<!-- <p class="login_h1"> Create a new account of BHike. </p> -->
+
+	<form data-ng-submit="userHandlerVM.functions.userHandlerSwitcher()">
+		<fieldset class="login_field">
+			<input type="text" name="usern" class="inputs" placeholder="UserName" required 
+			data-ng-model="userHandlerVM.user.username" readonly><br>
+			<input type="text" name="email" class="inputs" placeholder="Email" required 
+			data-ng-model="userHandlerVM.user.email" 
+			data-ng-readonly="userHandlerVM.functions.where('/deleteUser/'+userHandlerVM.user.id)"><br>
+			<input type="password" name="passw" class="inputs" placeholder="Password" required
+			data-ng-model="userHandlerVM.user.password" 
+			data-ng-readonly="userHandlerVM.functions.where('/deleteUser/'+userHandlerVM.user.id)">
+			<input type="password" name="passw2" class="inputs" placeholder="Confirm Password" required
+			data-ng-model="userHandlerVM.confirmPassw"><br>
+
+
+		</fieldset>
+		<div class="create_us">
+			<input name="sub_log" type="submit" class="butt_log" value="Edit"
+			data-ng-show="userHandlerVM.functions.where('/editUser/'+userHandlerVM.user.id)">
+			<input name="sub_log" type="submit" class="butt_log" value="Confirm Delete"
+			data-ng-show="userHandlerVM.functions.where('/deleteUser/'+userHandlerVM.user.id)">
+
+			<a class="cancel_c" href="#!/" data-ng-show="userHandlerVM.functions.where('/editUser/'+userHandlerVM.user.id)"> Cancel </a>
+			<a class="cancel_c" href="#!/editUser/{{userHandlerVM.user.id}}" data-ng-show="userHandlerVM.functions.where('/deleteUser/'+userHandlerVM.user.id)"> Cancel </a>
+		</div>
+
+	</form>
+	<a class="delete_account" href="#!/deleteUser/{{userHandlerVM.user.id}}" data-ng-show="userHandlerVM.functions.where('/editUser/'+userHandlerVM.user.id)" > Delete Account </a>
+</div>

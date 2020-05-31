@@ -1,5 +1,5 @@
-<div class="no_style" id="noneSt" data-ng-controller="headerCtrl as headerVM">	
-	<div class="nav_div" data-ng-if="headerVM.user.username != ''">
+
+	<div class="nav_div" data-ng-if="head.user.username != ''">
 		<ul>
 			<li><a href="index.html">Home</a></li>
 			<li><a href="#!/createRoute">Add Route</a></li>
@@ -9,9 +9,8 @@
 					<input id="icon_search" type="submit" value="->">
 				</form>
 			</li>
-			<li id="home_right_bar"><a href="../UpdateUserServlet.do">User Settings</a></li>
+		<li id="home_right_bar"><a href="#!/editUser/{{ head.user.id }}">User Settings</a></li>
 			<li id="home_right_bar"><a class="logout_h" href="../LogoutServlet.do" >Logout</a></li>
 			<li><img class="img_nav" alt="BHike" src="../img/BHike_blue.png"></li>
 		</ul>
 	</div>
-</div>

@@ -30,11 +30,21 @@ angular.module('BHikeApp', ['ngRoute'])
 			controller: "seeRouteCtrl",
 			controllerAs: "seeRouteVM",
 			templateUrl: "routeView.html"
-        })
-        .when("/deleteRoute/:ID", {
+		})
+		.when("/deleteRoute/:ID", {
 			controller: "routeHandlerCtrl",
 			controllerAs: "routeHandlerVM",
 			templateUrl: "routeHandlerTemplate.html"
+        })
+	    .when("/editUser/:ID", {
+			controller: "userHandlerCtrl",
+			controllerAs: "userHandlerVM",
+			templateUrl: "userSettingsTemplate.html"
+		})
+		.when("/deleteUser/:ID", {
+			controller: "userHandlerCtrl",
+			controllerAs: "userHandlerVM",
+			templateUrl: "userSettingsTemplate.html"
         });
 })
 

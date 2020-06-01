@@ -1,8 +1,10 @@
-<div class="filter_div">
-	<a id="hide1" href="#hide1" class="hide"> + Filter Search</a> <a
-		id="show1" href="#show1" class="show"> - Filter Search</a>
-	<div class="details">
-		<div class="content_fil">
+<div class="row" id="filter_div">
+  <input id="togList1" type="checkbox">
+  <label for="togList1">
+    <span>+ Filter Search</span>
+    <span>- Filter Search</span>
+  </label>
+  <div class="list">
 			<ul>
 				<li>
 					<a data-ng-href="#!/orderByKudos/Asc">Sort by Kudos (Ascending)</a>
@@ -11,7 +13,7 @@
 					<a data-ng-href="#!/orderByKudos/Desc">Sort by Kudos (Descent)</a>
 				</li>
 				<li>
-					<a data-ng-href="HideBlockedRtServlet.do"> Hide blocked routes</a>
+					<a data-ng-href="HideBlockedRtServlet.do"> Show available routes</a>
 				</li>
 				<li>
 					<a data-ng-href="ShowBlockedRtServlet.do"> Show blocked routes</a>
@@ -25,8 +27,6 @@
 					</form>
 				</li>
 			</ul>
-
-		</div>
-	</div>
+  </div>
 </div>
 <br>

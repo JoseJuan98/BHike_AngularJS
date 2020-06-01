@@ -425,7 +425,7 @@ body p,h1,h2,h3 {
 }
 
 /* Filter */
-.filter_div {
+#filter_div {
 	border-radius: 8px;	
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	width: 250px;
@@ -435,21 +435,17 @@ body p,h1,h2,h3 {
 	z-index: 1;
 	padding: 3px 2px 0px 5px;
 }
-.details,
-.show,
-.hide:target {
-  display: none;
+[id^="togList"],                        /* HIDE CHECKBOX */
+[id^="togList"] ~ .list,                /* HIDE LIST */
+[id^="togList"] + label  span + span,   /* HIDE "Collapse" */
+[id^="togList"]:checked + label span{   /* HIDE "Expand" (IF CHECKED) */
+  display:none;
 }
-.hide:target + .show,
-.hide:target ~ .details {
-  display: block;
+[id^="togList"]:checked + label span + span{
+  display:inline-block;                 /* SHOW "Collapse" (IF CHECKED) */
 }
-.hide1 {
-	color: black;
-	font-size: 3rem;
-}
-.content_fil {
-	margin-left: 40px;
+[id^="togList"]:checked ~ .list{
+  display:block;                        /* SHOW LIST (IF CHECKED) */
 }
 .title_m {
 	text-align: center;

@@ -16,13 +16,20 @@ angular.module('BHikeApp')
         			 return response.data;
                	});
 		},
-	  	putRoute : function(user){
+	  	putUser : function(user){
     		var urlid = url+user.id;
-            return $http.put(urlid, route)
+            return $http.put(urlid, user)
             	.then(function(response){
       				 return response;
   				});                   
-    	},
+		},
+		deleteUser : function(id){
+    		var urlid = url+id;
+            return $http.delete(urlid)
+            	.then(function(response){
+      				 return response;
+  				}); 
+        },
 		//TODO Update =====================
 		//TODO Delete =====================	
     }

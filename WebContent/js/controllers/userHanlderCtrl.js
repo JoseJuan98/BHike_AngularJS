@@ -1,12 +1,12 @@
 angular.module('BHikeApp')
-.controller('userHandlerCtrl', ['usersFactory','$routeParams','$location',function(usersFactory,$routeParams,$location){
+.controller('userHandlerCtrl', ['usersFactory','$routeParams','$location','$window',function(usersFactory,$routeParams,$location,$window){
     var userViewModel = this;
 	userViewModel.user={};
 	userViewModel.confirmPassw={};
     userViewModel.functions = {
 		
-   		where : function(user){
-   			return $location.path() == user;
+   		where : function(route){
+   			return $location.path() == route;
 		   },
 		readUser : function() {
 			usersFactory.getUser()
@@ -31,7 +31,7 @@ angular.module('BHikeApp')
 						console.log("Error updating user", response);
 					})
 			}
-		},//TODO =================================
+		},
 		deleteUser : function(id) {
 			if(userViewModel.user.password != userViewModel.confirmPassw){
 				alert("The passwords doesn't coincide");
@@ -39,12 +39,14 @@ angular.module('BHikeApp')
 				usersFactory.deleteUser(id)
 				.then(function(response){
 					console.log("Deleting user. Response:", response);
-					$location.path('/');
+					$window.location.href="https://localhost:8443/BHike_2/LoginServlet.do";
+					console.log($window.location.href);
+					//return userViewModel.functions.emptyUser();
 				},function(response){
 					console.log("Error deleting user", response);
 				})
 			}
-		},//TODO =========================
+		},
 		userHandlerSwitcher : function(){
 			if (userViewModel.functions.where('/editUser/'+userViewModel.user.id)){
 				console.log($location.path());
@@ -53,8 +55,8 @@ angular.module('BHikeApp')
 			}
 			else if (userViewModel.functions.where('/deleteUser/'+userViewModel.user.id)){
 				console.log($location.path());
-				userViewModel.functions.deleteUser(userViewModel.user.id);
-				$location.path('/');
+				userViewModel.functions.deleteUser(userViewModel.user.id);				
+				console.log($window.location.href);
 			}
 			else {
 				console.log($location.path());
@@ -63,7 +65,7 @@ angular.module('BHikeApp')
 			
 		}
     }
-	console.log("Entering routeHandlerCtrl with $routeParams.ID=",$routeParams.ID);
+	console.log("Entering userHandlerCtrl with $routeParams.ID=",$routeParams.ID);
 
 	userViewModel.functions.readUser();
  

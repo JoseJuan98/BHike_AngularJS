@@ -11,9 +11,17 @@
 		<p data-ng-show="route.difficulty == 3 "> Difficult </p>
 		<p data-ng-show="route.blocked == 1"> Blocked Route </p>
 		<p data-ng-show="route.blocked != 1"> Available Route </p>
+		<div class="kudo_div">
+			<div class="kudo_icon">
+				<a data-ng-href="#!/giveKudo/{{route.id}}"><img class="kud_img" alt="Like Kudo" src="../img/heart.svg"> </a>
+			</div>
+			<div class="kudo_icon">
+				<a href="<c:url value='#!/disKudo/{{route.id}}"><img class="kud_img" alt="Dislike Kudo" src="../img/dislike.svg"> </a>
+			</div>
+		</div>
 		<p>Kudos - {{route.kudos}}</p>
 		<p class="see">
 			<!-- <a class="logout_home" href="#!/seeRoute/{{route.id}}" > See </a> -->
-			<a class="logout_home" href="#!/editRoute/{{route.id}}" data-ng-show="route.idu == head.user.id"> Edit </a>
+			<a class="logout_home" data-ng-href="#!/editRoute/{{route.id}}" data-ng-show="route.idu == head.user.id"> Edit </a>
 		</p>
 

@@ -14,7 +14,15 @@
 		<p data-ng-show="routesByUser.first.difficulty == 3 "> Difficult </p>
 		<p data-ng-show="routesByUser.first.blocked == 1"> Blocked Route </p>
 		<p data-ng-show="routesByUser.first.blocked != 1"> Available Route </p>
-		<p>Kudos - {{routesByUser.first.kudos}}</p>
+		<div class="kudo_div">
+			<div class="kudo_icon">
+				<a data-ng-href="#!/giveKudo/{{route.id}}"><img class="kud_img" alt="Like Kudo" src="../img/heart.svg"> </a>
+			</div>
+			<div class="kudo_icon">
+				<a href="<c:url value='#!/disKudo/{{route.id}}"><img class="kud_img" alt="Dislike Kudo" src="../img/dislike.svg"> </a>
+			</div>
+		</div>
+		<p>Kudos - {{route.kudos}}</p>
 		<br>
 	
 			<!-- <a class="logout_home" href="#!/seeRoute/{{routesByUser.first.id}}" > See </a>-->

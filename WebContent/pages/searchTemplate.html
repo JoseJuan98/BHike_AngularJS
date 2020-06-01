@@ -1,17 +1,21 @@
+
+
 <div class="rtUsr_container">
+	
 	<div>
 		<div class="div_logo">
 			<img class="img_logo" alt="BHike" src="../img/BHike_purple.png">
 		</div>
 	</div>
-	
+	<br>
+	<br>
+	<h3 class="title_us"> Routes containing "{{ searchVM.search }}" :</h3>
 	<div class="div_routesUsr" data-ng-if="routesByUser.first != ''">
 		<div class="routes_container">
 			<div data-ng-repeat="routesByUser in searchVM.routes">
 				<div class="user_routes" data-ng-if=" routesByUser.first.blocked != 1 "
 					data-ng-include="'include/routeFrameSearch.htm'">
 				</div>
-
 			</div>
 		</div>
 		<br>

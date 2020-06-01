@@ -11,6 +11,12 @@ angular.module('BHikeApp')
 	    		}, function(response){
 	    			console.log("Error reading routes");
 	    		})
+		},
+		giveKudo : function(id) {
+			routesFactory.giveKudo()
+		},
+		disKudo : function(id) {
+			routesFactory.disKudo()
 		}
     }
     mapViewModel.functions.readRoutes();

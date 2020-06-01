@@ -1,6 +1,7 @@
 angular.module('BHikeApp')
 .controller('searchCtrl', ['routesFactory','$routeParams',function(routesFactory,$routeParams){
 	var searchViewModel = this;
+	searchViewModel.search={};
     searchViewModel.routes= [];
     searchViewModel.functions = {
  		where : function(route){
@@ -9,7 +10,8 @@ angular.module('BHikeApp')
     	readRoutes : function(search) {
     		routesFactory.getRoutesBySearch(search)
     			.then(function(response){
-	    			console.log("Reading all the routes: ", response);
+					console.log("Reading all the routes: ", response);
+					searchViewModel.search = $routeParams.Srch;
 	    			searchViewModel.routes = response;
 	    		}, function(response){
 	    			console.log("Error reading routes");

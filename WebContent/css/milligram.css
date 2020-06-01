@@ -140,10 +140,9 @@ body p,h1,h2,h3 {
 	text-align: left;
 }
 .see {
-	position: absolute;
+    color: blue;
+    position: absolute;
 	bottom: 0;
-	align-self: center;
-	margin-left: 10px;
 }
 .title_us_route {
     border-bottom: 0.1rem solid #e1e1e1;

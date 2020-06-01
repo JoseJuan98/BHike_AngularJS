@@ -60,6 +60,31 @@ angular.module('BHikeApp', ['ngRoute'])
 			controller: "kudoCtrl",
     		controllerAs: "mapVM",
     		templateUrl: "MapRoutesTemplate.html",
+		})//TODO =============================
+		.when("/orderByKudos/Asc", {
+			controller: "searchCtrl",
+			controllerAs: "searchVM",
+			templateUrl: "searchTemplate.html"
+		})
+		.when("/orderByKudos/Desc", {
+			controller: "searchCtrl",
+			controllerAs: "searchVM",
+			templateUrl: "searchTemplate.html"
+		})
+		.when("/showAvailable", {
+			controller: "searchCtrl",
+			controllerAs: "searchVM",
+			templateUrl: "searchTemplate.html"
+		})
+		.when("/showBlocked", {
+			controller: "searchCtrl",
+			controllerAs: "searchVM",
+			templateUrl: "searchTemplate.html"
+		})
+		.when("/minKudos/:N", {
+			controller: "searchCtrl",
+			controllerAs: "searchVM",
+			templateUrl: "searchTemplate.html"
 		});
 })
 

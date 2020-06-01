@@ -130,8 +130,13 @@ angular.module('BHikeApp')
 		},
 		checkCats : function(name) {
 			for (var i = 0; i < routeHandlerViewModel.catsRoute.length; i++) {
-                if (routeHandlerViewModel.catsRoute[i].name == name) {					
-					return true;
+                if (routeHandlerViewModel.catsRoute[i].name == name) {
+					for (var j = 0; j < routeHandlerViewModel.categories.length; j++) {
+						if(routeHandlerViewModel.categories[j].name == name){
+							routeHandlerViewModel.categories[j].Selected = true;
+							return true;
+						}
+					}					
                 }
 			}
 			return false;

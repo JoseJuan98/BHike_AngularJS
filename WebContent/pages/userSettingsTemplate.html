@@ -1,6 +1,6 @@
 <div class="div_settings">
 	<h1 class="sett_h1">BHike</h1>
-	<p id="error_log" class="login_field">{{ userHandlerVM }}</p>
+<p id="error_log" class="login_field">{{ userHandlerVM }}</p>
 
 	<p class="login_h1" data-ng-show="userHandlerVM.functions.where('/deleteUser/'+userHandlerVM.user.id)"> Replace the field to change and confirm password. </p>
 	<p class="login_h1" data-ng-show="userHandlerVM.functions.where('/editUser/'+userHandlerVM.user.id)"> Confirm password to proceed. </p>
@@ -18,8 +18,6 @@
 			data-ng-readonly="userHandlerVM.functions.where('/deleteUser/'+userHandlerVM.user.id)">
 			<input type="password" name="passw2" class="inputs" placeholder="Confirm Password" required
 			data-ng-model="userHandlerVM.confirmPassw"><br>
-
-
 		</fieldset>
 		<div class="create_us">
 			<input name="sub_log" type="submit" class="butt_log" value="Edit"

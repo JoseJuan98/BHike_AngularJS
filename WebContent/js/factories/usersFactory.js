@@ -15,7 +15,14 @@ angular.module('BHikeApp')
               	.then(function(response){
         			 return response.data;
                	});
-		}	
+		},
+	  	putRoute : function(user){
+    		var urlid = url+user.id;
+            return $http.put(urlid, route)
+            	.then(function(response){
+      				 return response;
+  				});                   
+    	},
 		//TODO Update =====================
 		//TODO Delete =====================	
     }

@@ -21,12 +21,16 @@ angular.module('BHikeApp')
 			userViewModel.user ={};
 		},
 		updateUser : function() {
-			usersFactory.putUser(userViewModel.user)
-				.then(function(response){
-					console.log("Updating user with id:",userViewModel.user.id," Response:", response);
-    			}, function(response){
-    				console.log("Error updating user", response);
-    			})
+			if(userViewModel.user.password != userViewModel.confirmPassw){
+				alert("The passwords doesn't coincide");
+			}else{
+				usersFactory.putUser(userViewModel.user)
+					.then(function(response){
+						console.log("Updating user with id:",userViewModel.user.id," Response:", response);
+					}, function(response){
+						console.log("Error updating user", response);
+					})
+			}
 		},//TODO =================================
 		deleteUser : function(id) {
 			if(userViewModel.user.password != userViewModel.confirmPassw){
@@ -50,6 +54,7 @@ angular.module('BHikeApp')
 			else if (userViewModel.functions.where('/deleteUser/'+userViewModel.user.id)){
 				console.log($location.path());
 				userViewModel.functions.deleteUser(userViewModel.user.id);
+				$location.path('/');
 			}
 			else {
 				console.log($location.path());

@@ -281,7 +281,10 @@ public class RoutesResource {
 		} else
 			throw new WebApplicationException(Response.Status.NOT_FOUND);
 
-		return response;
+		response = Response // return 201 and Location: /routes/newid
+				.created(uriInfo.getAbsolutePathBuilder().path(Long.toString(routeId)).build())
+				.contentLocation(uriInfo.getAbsolutePathBuilder().path(Long.toString(routeId)).build()).build();
+		return response;	
 	}
 	
 	@DELETE

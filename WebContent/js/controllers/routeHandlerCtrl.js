@@ -48,7 +48,6 @@ angular.module('BHikeApp')
 	    		})
 		},
 		updateRoute : function() {
-
 			routesFactory.putRoute(routeHandlerViewModel.route)
 				.then(function(response){
 					console.log("Updating route with id:",routeHandlerViewModel.route.id," Response:", response);

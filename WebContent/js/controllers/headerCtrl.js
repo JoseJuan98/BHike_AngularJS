@@ -3,6 +3,7 @@ angular.module('BHikeApp')
     var headerViewModel = this;
 	headerViewModel.user={};
 	headerViewModel.search='';
+	headerViewModel.min=0;
     headerViewModel.functions = {
 		readUser : function() {
 			usersFactory.getUser()

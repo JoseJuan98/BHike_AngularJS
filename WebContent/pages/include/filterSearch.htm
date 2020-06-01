@@ -19,12 +19,13 @@
 					<a data-ng-href="ShowBlockedRtServlet.do"> Show blocked routes</a>
 				</li>
 				<li>
-					<form action="OrderKudosServlet.do" class="form_mink">
+					<div class="form_mink">
 						<input type="text" style="display:none" value="Min" name="SortType">
 						<label for="minkud">Min Kudos</label>
-						<input name="minkud" class="minkud" type="number" min="0" value="0" step="1" >
-						<input id="icon_minKud" type="submit" value="->">
-					</form>
+						<input name="minkud" class="minkud" type="number" min="0" value="0" step="1" 
+						data-ng-model="head.min">
+						<a id="icon_minKud" data-ng-href="#!/minKudos/{{head.min}}">-></a>
+					</div>
 				</li>
 			</ul>
   </div>

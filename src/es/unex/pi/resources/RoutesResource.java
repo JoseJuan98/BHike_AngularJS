@@ -39,6 +39,8 @@ import es.unex.pi.model.RoutesCategories;
 import es.unex.pi.model.User;
 import es.unex.pi.resources.exceptions.CustomBadRequestException;
 import es.unex.pi.resources.exceptions.CustomNotFoundException;
+import es.unex.pi.util.SortByKudosAscTriplet;
+import es.unex.pi.util.SortByKudosDescTriplet;
 import es.unex.pi.util.Triplet;
 
 @Path("/routes")
@@ -420,4 +422,92 @@ public class RoutesResource {
 				.contentLocation(uriInfo.getAbsolutePathBuilder().path(Long.toString(routeId)).build()).build();
 		return response;	
 	}
+	@GET
+	@Path("/orderRoutes/{order: [a-zA-Z0-9_]+}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Triplet<Route, User, List<RoutesCategories>>> getAllRoutesInOrderJSON(@Context HttpServletRequest request, @PathParam("order") String order) {
+		Connection conn = (Connection) sc.getAttribute("dbConn");
+		UserDAO userDAO = new JDBCUserDAOImpl();
+		userDAO.setConnection(conn);
+
+		RouteDAO routeDAO = new JDBCRouteDAOImpl();
+		routeDAO.setConnection(conn);
+		
+		CategoryDAO categoryDAO = new JDBCCategoryDAOImpl();
+		categoryDAO.setConnection(conn);
+		
+		RoutesCategoriesDAO routesCategoriesDAO = new JDBCRoutesCategoriesDAOImpl();
+		routesCategoriesDAO.setConnection(conn);
+		
+		List<Route> routesList = routeDAO.getAll();
+		
+		Iterator<Route> itRouteList = routesList.iterator();
+
+		List<Triplet<Route, User, List<RoutesCategories>>> routesUserList = new ArrayList<Triplet<Route, User, List<RoutesCategories>>>();
+
+		while(itRouteList.hasNext()) {
+			Route route = (Route) itRouteList.next();
+			User user = userDAO.get(route.getIdu());
+			List<RoutesCategories> routesCategories = routesCategoriesDAO.getAllByRoute(route.getId());
+
+			routesUserList.add(new Triplet<Route, User, List<RoutesCategories>>(route,user,routesCategories));
+		}
+		
+		if(order.equals("Asc")) {
+			Collections.sort(routesUserList, new SortByKudosAscTriplet());
+		}else if(order.equals("Desc")) {
+			Collections.sort(routesUserList, new SortByKudosDescTriplet());
+		}
+		
+		return routesUserList;	
+	}
+	@GET
+	@Path("/minKudos/{min: [0-9]+}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Triplet<Route, User, List<RoutesCategories>>> getAllRoutesInOrderAndMinJSON(@Context HttpServletRequest request, @PathParam("order") String order, @PathParam("min") int min) {
+		Connection conn = (Connection) sc.getAttribute("dbConn");
+		UserDAO userDAO = new JDBCUserDAOImpl();
+		userDAO.setConnection(conn);
+
+		RouteDAO routeDAO = new JDBCRouteDAOImpl();
+		routeDAO.setConnection(conn);
+		
+		CategoryDAO categoryDAO = new JDBCCategoryDAOImpl();
+		categoryDAO.setConnection(conn);
+		
+		RoutesCategoriesDAO routesCategoriesDAO = new JDBCRoutesCategoriesDAOImpl();
+		routesCategoriesDAO.setConnection(conn);
+		
+		List<Route> routesList = routeDAO.getAll();
+		
+		Iterator<Route> itRouteList = routesList.iterator();
+
+		List<Triplet<Route, User, List<RoutesCategories>>> routesUserList = new ArrayList<Triplet<Route, User, List<RoutesCategories>>>();
+
+		while(itRouteList.hasNext()) {
+			Route route = (Route) itRouteList.next();
+			User user = userDAO.get(route.getIdu());
+			List<RoutesCategories> routesCategories = routesCategoriesDAO.getAllByRoute(route.getId());
+
+			routesUserList.add(new Triplet<Route, User, List<RoutesCategories>>(route,user,routesCategories));
+		}
+		
+//		if(order.equals("Asc")) {
+//			Collections.sort(routesUserList, new SortByKudosAscTriplet());
+//		}else if(order.equals("Desc")) {
+//			Collections.sort(routesUserList, new SortByKudosDescTriplet());
+//		}
+		
+		List<Triplet<Route, User, List<RoutesCategories>>> rtUsList_aux = new ArrayList<Triplet<Route,User,List<RoutesCategories>>>();
+		
+		for(Triplet<Route, User, List<RoutesCategories>> t_aux:routesUserList) {
+			if(t_aux.getFirst().getKudos() < min){
+				rtUsList_aux.add(t_aux);
+			}
+		}
+		routesUserList.removeAll(rtUsList_aux);
+		
+		return routesUserList;	
+	}
 }
+

@@ -450,7 +450,9 @@ body p,h1,h2,h3 {
 .title_m {
 	text-align: center;
 }
-
+#togList1{
+    display: none;
+}
 #icon_minkud {
     display: none;
     position: relative;

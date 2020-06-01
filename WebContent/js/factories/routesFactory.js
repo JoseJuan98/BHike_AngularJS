@@ -76,14 +76,21 @@ angular.module('BHikeApp')
             	.then(function(response){
       				 return response;
   				});  
-		},		
+		},	
 		getRoutesOrdered : function(order){
 			var urlOrd = url + 'orderRoutes/' + order;
 			return $http.get(urlOrd)
     			.then(function(response){
     				return response.data;
     			});
-		},
+		},		
+		getRoutesMinKudos : function(min){
+			var urlMin = url + 'minKudos/' + min;
+			return $http.get(urlMin)
+    			.then(function(response){
+    				return response.data;
+    			});
+		}
     }
     return routesInterface;
 }])

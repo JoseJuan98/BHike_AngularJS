@@ -9,7 +9,8 @@
 	</div>
 	<br>
 	<br>
-	<h3 class="title_us"> Routes containing "{{ searchVM.search }}" :</h3>
+	<h3 class="title_us" data-ng-if="searchVM.functions.where('/search/'+searchVM.search)"> Routes containing "{{ searchVM.search }}" :</h3>
+	<h3 class="title_us" data-ng-if="!searchVM.functions.where('/search/'+searchVM.search)"> Routes {{ searchVM.search }} :</h3>
 	<div class="div_routesUsr" data-ng-if="routesByUser.first != ''">
 		<div class="routes_container">
 			<div data-ng-repeat="routesByUser in searchVM.routes">

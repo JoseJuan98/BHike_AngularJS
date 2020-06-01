@@ -60,7 +60,7 @@ angular.module('BHikeApp', ['ngRoute'])
 			controller: "kudoCtrl",
     		controllerAs: "mapVM",
     		templateUrl: "MapRoutesTemplate.html",
-		})//TODO =============================
+		})
 		.when("/orderByKudos/Asc", {
 			controller: "searchCtrl",
 			controllerAs: "searchVM",

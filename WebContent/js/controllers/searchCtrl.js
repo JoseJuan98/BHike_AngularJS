@@ -24,6 +24,15 @@ angular.module('BHikeApp')
 	    		}, function(response){
 	    			console.log("Error reading routes in order",order,"routes");
 	    		})
+		},
+		readRoutesMinKudos : function(min) {
+			routesFactory.getRoutesMinKudos(min)
+				.then(function(response){
+					console.log("Reading all routes greater than: ",min," : ", response);					
+	    			searchViewModel.routes = response;
+	    		}, function(response){
+	    			console.log("Error reading routes greater than",min,"routes");
+	    		})
 		}
 	}
 	//var str = $location.path();
@@ -38,15 +47,20 @@ angular.module('BHikeApp')
 	}else{
 		console.log('Undefined parameter Search');
 		if(searchViewModel.functions.where('/orderByKudos/Asc')){
+			searchViewModel.search='by ascending order';
 			searchViewModel.functions.readRoutesOrdered('Asc');
 		}else if(searchViewModel.functions.where('/orderByKudos/Desc')){
+			searchViewModel.search='by descending order';
 			searchViewModel.functions.readRoutesOrdered('Desc');
 		}else if(searchViewModel.functions.where('/showAvailable')){
-
+			searchViewModel.search='avalaible';
+			//TODO
 		}else if(searchViewModel.functions.where('/showBlocked')){
-
+			searchViewModel.search='blocked';
+			//TODO
 		}else if(searchViewModel.functions.where('/minKudos/'+$routeParams.N)){
-
+			searchViewModel.search='kudos greater than '+$routeParams.N;
+			searchViewModel.functions.readRoutesMinKudos($routeParams.N);
 		}
 		
 	}

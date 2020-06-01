@@ -2,6 +2,7 @@ package es.unex.pi.resources;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -38,6 +39,7 @@ import es.unex.pi.model.RoutesCategories;
 import es.unex.pi.model.User;
 import es.unex.pi.resources.exceptions.CustomBadRequestException;
 import es.unex.pi.resources.exceptions.CustomNotFoundException;
+import es.unex.pi.util.Triplet;
 
 @Path("/routes")
 public class RoutesResource {
@@ -84,7 +86,43 @@ public class RoutesResource {
 
 		return userRoutesMap;
 	}
+	
+	@GET
+	@Path("/search/{search: [a-zA-Z0-9_]+}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Triplet<Route, User, List<RoutesCategories>>> getAllRoutesBySearch2JSON(@Context HttpServletRequest request, @PathParam("search") String search) {
+		Connection conn = (Connection) sc.getAttribute("dbConn");
+		UserDAO userDAO = new JDBCUserDAOImpl();
+		userDAO.setConnection(conn);
 
+		RouteDAO routeDAO = new JDBCRouteDAOImpl();
+		routeDAO.setConnection(conn);
+		
+		CategoryDAO categoryDAO = new JDBCCategoryDAOImpl();
+		categoryDAO.setConnection(conn);
+		
+		RoutesCategoriesDAO routesCategoriesDAO = new JDBCRoutesCategoriesDAOImpl();
+		routesCategoriesDAO.setConnection(conn);
+		
+		List<Route> routesList = routeDAO.getAllBySearchAll(search);
+		
+		Iterator<Route> itRouteList = routesList.iterator();
+
+		List<Triplet<Route, User, List<RoutesCategories>>> routesUserList = new ArrayList<Triplet<Route, User, List<RoutesCategories>>>();
+		
+		List<User> listUser = new ArrayList<User>();
+		
+		while(itRouteList.hasNext()) {
+			Route route = (Route) itRouteList.next();
+			User user = userDAO.get(route.getIdu());
+			List<RoutesCategories> routesCategories = routesCategoriesDAO.getAllByRoute(route.getId());
+			listUser.add(user);
+
+			routesUserList.add(new Triplet<Route, User, List<RoutesCategories>>(route,user,routesCategories));
+		}
+		return routesUserList;
+		
+	}
 	@GET
 	@Path("/{routeid: [0-9]+}")
 	@Produces(MediaType.APPLICATION_JSON)

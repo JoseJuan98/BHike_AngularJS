@@ -1,0 +1,21 @@
+		<h4 class="title_us_route">{{routesByUser.first.title}}, {{ routesByUser.second.username }}</h4>
+		<h4 class="title_us_route">{{ routesByUser.second.email }}</h4>
+		<div class="rtFrame_img" >
+			<img alt="Hike" class="img_frame" data-ng-show="routesByUser.first.difficulty == 1" src="../img/hike1.jpeg">
+			<img alt="Hike" class="img_frame" data-ng-show="routesByUser.first.difficulty == 2" src="../img/swim1.jpeg">
+			<img alt="Hike" class="img_frame" data-ng-show="routesByUser.first.difficulty == 3" src="../img/ciclying1.jpeg">
+		</div>
+		<p>{{routesByUser.first.description}}</p>
+		<p>{{routesByUser.first.distance}} Km (D) {{routesByUser.first.elevation}} m(E)
+			{{routesByUser.first.durationH}}h{{routesByUser.first.durationM}} Duration </p>
+		<p> On {{routesByUser.first.date}} </p>
+		<p data-ng-show="routesByUser.first.difficulty == 1 "> Easy </p>
+		<p data-ng-show="routesByUser.first.difficulty == 2 "> Medium </p>
+		<p data-ng-show="routesByUser.first.difficulty == 3 "> Difficult </p>
+		<p data-ng-show="routesByUser.first.blocked == 1"> Blocked Route </p>
+		<p data-ng-show="routesByUser.first.blocked != 1"> Available Route </p>
+		<p>Kudos - {{routesByUser.first.kudos}}</p>
+		<p class="see">
+			<!-- <a class="logout_home" href="#!/seeRoute/{{routesByUser.first.id}}" > See </a>-->
+			<a class="logout_home" href="#!/editRoute/{{routesByUser.first.id}}" data-ng-show="routesByUser.first.idu == head.user.id"> Edit </a>
+		</p>

@@ -1,7 +1,8 @@
 angular.module('BHikeApp')
 .controller('headerCtrl', ['usersFactory',function(usersFactory){
     var headerViewModel = this;
-    headerViewModel.user={};
+	headerViewModel.user={};
+	headerViewModel.search='';
     headerViewModel.functions = {
 		readUser : function() {
 			usersFactory.getUser()

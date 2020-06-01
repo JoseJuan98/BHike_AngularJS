@@ -4,10 +4,10 @@
 			<li><a href="index.html">Home</a></li>
 			<li><a href="#!/createRoute">Add Route</a></li>
 			<li class="search_li">
-				<form class="form_nav" method="get" action="../SearchServlet.do">
-					<input type="search" name="search" class="search_input" placeholder="Search"> 
-					<input id="icon_search" type="submit" value="->">
-				</form>
+				<div class="no_style">
+					<input type="search" name="search" class="search_input" placeholder="Search" data-ng-model="head.search"/>
+					<a data-ng-href="#!/search/{{ head.search }}" id="icon_search">-></a>
+				</div>
 			</li>
 		<li id="home_right_bar"><a href="#!/editUser/{{ head.user.id }}">User Settings</a></li>
 			<li id="home_right_bar"><a class="logout_h" href="../LogoutServlet.do" >Logout</a></li>

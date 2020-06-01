@@ -14,7 +14,14 @@ angular.module('BHikeApp')
     				//devuelve los datos de la promesa 
     				return response.data;
     			});
-    	},
+		},
+		getRoutesBySearch : function(search){
+			var urlSearch = url + 'search/' + search;
+			return $http.get(urlSearch)
+    			.then(function(response){
+    				return response.data;
+    			});
+		},
     	getRoute : function(id){
     		var urlid = url + id;
             return $http.get(urlid)

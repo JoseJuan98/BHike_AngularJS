@@ -300,15 +300,13 @@ body p,h1,h2,h3 {
     appearance: none;
     display: inline-block;
     border: 0;
-    border-bottom: 0.3rpm solid;
-    outline: 0;
     caret-color: transparent;
     width: 70%;
     color: #9b4dca;
     border-bottom: 0.1rem solid #d1d1d1;
     height: 3.8rem;
     padding: .6rem 1.0rem;
-    margin-top: 4px;
+    margin-top: -4px;
     padding-right: 8%;
 }
 

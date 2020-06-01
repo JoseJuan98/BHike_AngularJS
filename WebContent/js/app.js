@@ -45,6 +45,11 @@ angular.module('BHikeApp', ['ngRoute'])
 			controller: "userHandlerCtrl",
 			controllerAs: "userHandlerVM",
 			templateUrl: "userSettingsTemplate.html"
+		})
+		.when("/search/:Srch", {
+			controller: "searchCtrl",
+			controllerAs: "searchVM",
+			templateUrl: "searchTemplate.html"
         });
 })
 

@@ -50,7 +50,17 @@ angular.module('BHikeApp', ['ngRoute'])
 			controller: "searchCtrl",
 			controllerAs: "searchVM",
 			templateUrl: "searchTemplate.html"
-        });
+		})
+		.when("/giveKudo/:ID", {
+			controller: "kudoCtrl",
+    		controllerAs: "mapVM",
+    		templateUrl: "MapRoutesTemplate.html",
+		})
+		.when("/disKudo/:ID", {
+			controller: "kudoCtrl",
+    		controllerAs: "mapVM",
+    		templateUrl: "MapRoutesTemplate.html",
+		});
 })
 
 //Factories call the API REST - DAO de angular

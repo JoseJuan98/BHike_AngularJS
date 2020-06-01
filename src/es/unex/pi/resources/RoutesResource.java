@@ -344,4 +344,80 @@ public class RoutesResource {
 		else throw new CustomBadRequestException("Error in user or id");		
 			
 	}
+	@PUT
+	@Path("/giveKudo/{routeId: [0-9]+}")
+	public Response giveKudoRoute(@PathParam("routeId") long routeId, @Context HttpServletRequest request)
+			throws Exception {
+		Connection conn = (Connection) sc.getAttribute("dbConn");
+		RouteDAO routeDao = new JDBCRouteDAOImpl();
+		routeDao.setConnection(conn);
+
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+
+		Response response = null;
+		
+		if(user == null) {
+			System.out.println("No session established.");
+			return Response.status(401).build();
+		}
+		// We check that the route exists
+		Route route = routeDao.get(routeId);
+		if ((route != null)) {
+			if (route.getId() != routeId)
+				throw new CustomBadRequestException("Error in id.");
+			else {
+				route.setKudos(route.getKudos()+1);
+				System.out.println("Route after changing things: " + route.toString());
+				
+				routeDao.save(route);
+			}
+		} else {
+			throw new WebApplicationException(Response.Status.NOT_FOUND);
+		}
+
+		response = Response // return 201 and Location: /routes/newid
+				.created(uriInfo.getAbsolutePathBuilder().path(Long.toString(routeId)).build())
+				.contentLocation(uriInfo.getAbsolutePathBuilder().path(Long.toString(routeId)).build()).build();
+		return response;	
+	}
+	
+	@PUT
+	@Path("/disKudo/{routeId: [0-9]+}")
+	public Response disKudoRoute(@PathParam("routeId") long routeId, @Context HttpServletRequest request)
+			throws Exception {
+		Connection conn = (Connection) sc.getAttribute("dbConn");
+		RouteDAO routeDao = new JDBCRouteDAOImpl();
+		routeDao.setConnection(conn);
+
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+
+		Response response = null;
+		
+		if(user == null) {
+			System.out.println("No session established.");
+			return Response.status(401).build();
+		}
+		// We check that the route exists
+		Route route = routeDao.get(routeId);
+		if ((route != null)) {
+			if (route.getId() != routeId)
+				throw new CustomBadRequestException("Error in id.");
+			else {
+				if(route.getKudos() > 0) {
+					route.setKudos(route.getKudos()-1);
+				}
+				System.out.println("Route after changing things: " + route.toString());
+				
+				routeDao.save(route);
+			}
+		} else
+			throw new WebApplicationException(Response.Status.NOT_FOUND);
+
+		response = Response // return 201 and Location: /routes/newid
+				.created(uriInfo.getAbsolutePathBuilder().path(Long.toString(routeId)).build())
+				.contentLocation(uriInfo.getAbsolutePathBuilder().path(Long.toString(routeId)).build()).build();
+		return response;	
+	}
 }

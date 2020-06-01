@@ -62,21 +62,20 @@ angular.module('BHikeApp')
             	.then(function(response){
             		return response.data;
          		});
-		},//TODO ====================================
+		},
 		giveKudo : function(id) {
-			urlCats = url + rtId + '/categories/' + catId;
-			return $http.post(urlCats)
-				.then(function(response){
-					return response;
-				});
-		},//TODO ====================================
+    		var urlid = url+'giveKudo/'+id;
+            return $http.put(urlid)
+            	.then(function(response){
+      				 return response;
+  				});  
+		},
 		disKudo : function(id) {
-			urlCats = url + rtId + '/categories/' + catId;
-			return $http.post(urlCats)
-				.then(function(response){
-					return response;
-				});
-
+    		var urlid = url+'disKudo/'+id;
+            return $http.put(urlid)
+            	.then(function(response){
+      				 return response;
+  				});  
 		}
     }
     return routesInterface;

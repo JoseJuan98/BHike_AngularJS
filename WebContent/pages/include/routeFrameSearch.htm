@@ -16,13 +16,13 @@
 		<p data-ng-show="routesByUser.first.blocked != 1"> Available Route </p>
 		<div class="kudo_div">
 			<div class="kudo_icon">
-				<a data-ng-href="#!/giveKudo/{{route.id}}"><img class="kud_img" alt="Like Kudo" src="../img/heart.svg"> </a>
+				<a data-ng-href="#!/giveKudo/{{routesByUser.first.id}}"><img class="kud_img" alt="Like Kudo" src="../img/heart.svg"> </a>
 			</div>
 			<div class="kudo_icon">
-				<a href="<c:url value='#!/disKudo/{{route.id}}"><img class="kud_img" alt="Dislike Kudo" src="../img/dislike.svg"> </a>
+				<a href="#!/disKudo/{{routesByUser.first.id}}"><img class="kud_img" alt="Dislike Kudo" src="../img/dislike.svg"> </a>
 			</div>
 		</div>
-		<p>Kudos - {{route.kudos}}</p>
+		<p>Kudos - {{routesByUser.first.kudos}}</p>
 		<br>
 	
 			<!-- <a class="logout_home" href="#!/seeRoute/{{routesByUser.first.id}}" > See </a>-->

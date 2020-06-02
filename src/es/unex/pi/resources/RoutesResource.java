@@ -509,5 +509,129 @@ public class RoutesResource {
 		
 		return routesUserList;	
 	}
+	@GET
+	@Path("/availability/{ava: [0-1]}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Triplet<Route, User, List<RoutesCategories>>> getAllRoutesByAvailabilityJSON(@Context HttpServletRequest request, @PathParam("ava") int ava) {
+		Connection conn = (Connection) sc.getAttribute("dbConn");
+		UserDAO userDAO = new JDBCUserDAOImpl();
+		userDAO.setConnection(conn);
+
+		RouteDAO routeDAO = new JDBCRouteDAOImpl();
+		routeDAO.setConnection(conn);
+		
+		CategoryDAO categoryDAO = new JDBCCategoryDAOImpl();
+		categoryDAO.setConnection(conn);
+		
+		RoutesCategoriesDAO routesCategoriesDAO = new JDBCRoutesCategoriesDAOImpl();
+		routesCategoriesDAO.setConnection(conn);
+		
+		List<Route> routesList = routeDAO.getAll();
+		
+		Iterator<Route> itRouteList = routesList.iterator();
+
+		List<Triplet<Route, User, List<RoutesCategories>>> routesUserList = new ArrayList<Triplet<Route, User, List<RoutesCategories>>>();
+
+		while(itRouteList.hasNext()) {
+			Route route = (Route) itRouteList.next();
+			User user = userDAO.get(route.getIdu());
+			List<RoutesCategories> routesCategories = routesCategoriesDAO.getAllByRoute(route.getId());
+
+			routesUserList.add(new Triplet<Route, User, List<RoutesCategories>>(route,user,routesCategories));
+		}
+		
+//		if(order.equals("Asc")) {
+//			Collections.sort(routesUserList, new SortByKudosAscTriplet());
+//		}else if(order.equals("Desc")) {
+//			Collections.sort(routesUserList, new SortByKudosDescTriplet());
+//		}
+		
+		List<Triplet<Route, User, List<RoutesCategories>>> rtUsList_aux = new ArrayList<Triplet<Route,User,List<RoutesCategories>>>();
+		
+		for(Triplet<Route, User, List<RoutesCategories>> t_aux:routesUserList) {
+			if(t_aux.getFirst().getBlocked() != ava){
+				rtUsList_aux.add(t_aux);
+			}
+		}
+		routesUserList.removeAll(rtUsList_aux);
+		
+		return routesUserList;	
+	}
+	@PUT
+	@Path("/blockRoute/{routeId: [0-9]+}")
+	public Response blockRoute(@PathParam("routeId") long routeId, @Context HttpServletRequest request)
+			throws Exception {
+		Connection conn = (Connection) sc.getAttribute("dbConn");
+		RouteDAO routeDao = new JDBCRouteDAOImpl();
+		routeDao.setConnection(conn);
+
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+
+		Response response = null;
+		
+		if(user == null) {
+			System.out.println("No session established.");
+			return Response.status(401).build();
+		}
+		// We check that the route exists
+		Route route = routeDao.get(routeId);
+		if ((route != null)) {
+			if (route.getId() != routeId)
+				throw new CustomBadRequestException("Error in id.");
+			else {
+				if(route.getBlocked() == 0) {
+					route.setBlocked(1);
+				}
+				System.out.println("Route after changing things: " + route.toString());
+				
+				routeDao.save(route);
+			}
+		} else
+			throw new WebApplicationException(Response.Status.NOT_FOUND);
+
+		response = Response // return 201 and Location: /routes/newid
+				.created(uriInfo.getAbsolutePathBuilder().path(Long.toString(routeId)).build())
+				.contentLocation(uriInfo.getAbsolutePathBuilder().path(Long.toString(routeId)).build()).build();
+		return response;		
+	}
+	@PUT
+	@Path("/unblockRoute/{routeId: [0-9]+}")
+	public Response unblockRoute(@PathParam("routeId") long routeId, @Context HttpServletRequest request)
+			throws Exception {
+		Connection conn = (Connection) sc.getAttribute("dbConn");
+		RouteDAO routeDao = new JDBCRouteDAOImpl();
+		routeDao.setConnection(conn);
+
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+
+		Response response = null;
+		
+		if(user == null) {
+			System.out.println("No session established.");
+			return Response.status(401).build();
+		}
+		// We check that the route exists
+		Route route = routeDao.get(routeId);
+		if ((route != null)) {
+			if (route.getId() != routeId)
+				throw new CustomBadRequestException("Error in id.");
+			else {
+				if(route.getBlocked() == 1) {
+					route.setBlocked(0);
+				}
+				System.out.println("Route after changing things: " + route.toString());
+				
+				routeDao.save(route);
+			}
+		} else
+			throw new WebApplicationException(Response.Status.NOT_FOUND);
+
+		response = Response // return 201 and Location: /routes/newid
+				.created(uriInfo.getAbsolutePathBuilder().path(Long.toString(routeId)).build())
+				.contentLocation(uriInfo.getAbsolutePathBuilder().path(Long.toString(routeId)).build()).build();
+		return response;		
+	}
 }
 

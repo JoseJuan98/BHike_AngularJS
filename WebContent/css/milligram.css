@@ -135,6 +135,22 @@ body p,h1,h2,h3 {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     position: relative;
 }
+.user_routes2 {
+    margin: 1.2em 0.8em 1.2em 0.8em;
+    padding: 1px;
+    /*border-radius: 8px;*/
+    width: 400px;
+    height: 800px;
+    display: inline-block;
+    border-left: 0.1rem solid #e1e1e1;
+    text-align: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    position: relative;
+}
+.user_routes2 p:not(.see){
+	margin: 4px 0px 0px 10px;
+	text-align: left;
+}
 .user_routes p:not(.see){
 	margin: 4px 0px 0px 10px;
 	text-align: left;

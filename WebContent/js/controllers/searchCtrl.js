@@ -33,6 +33,35 @@ angular.module('BHikeApp')
 	    		}, function(response){
 	    			console.log("Error reading routes greater than",min,"routes");
 	    		})
+		},
+		readRoutesByAvailability : function(ava) {
+			routesFactory.getRoutesByAvailability(ava)
+				.then(function(response){
+					console.log("Reading all routes with availability: ",ava," : ", response);					
+					searchViewModel.routes = response;
+				}, function(response){
+					console.log("Error reading routes with availibility ",ava);
+				})
+		},
+		updateAvailability : function(ava) {
+			if( ava != 1){
+				routesFactory.blockRoute($routeParams.ID)
+					.then(function(response){
+						console.log("Reading all routes with availability: ",ava," : ", response);					
+						searchViewModel.routes = response;
+					}, function(response){
+						console.log("Error reading routes with availibility ",ava);
+					})
+			}else{
+				routesFactory.unblockRoute($routeParams.ID)
+					.then(function(response){
+						console.log("Reading all routes with availability: ",ava," : ", response);					
+						searchViewModel.routes = response;
+					}, function(response){
+						console.log("Error reading routes with availibility ",ava);
+					})
+			}
+
 		}
 	}
 	//var str = $location.path();
@@ -54,13 +83,21 @@ angular.module('BHikeApp')
 			searchViewModel.functions.readRoutesOrdered('Desc');
 		}else if(searchViewModel.functions.where('/showAvailable')){
 			searchViewModel.search='avalaible';
-			//TODO
+			searchViewModel.functions.readRoutesByAvailability(0);
 		}else if(searchViewModel.functions.where('/showBlocked')){
 			searchViewModel.search='blocked';
-			//TODO
+			searchViewModel.functions.readRoutesByAvailability(1);
 		}else if(searchViewModel.functions.where('/minKudos/'+$routeParams.N)){
 			searchViewModel.search='kudos greater than '+$routeParams.N;
 			searchViewModel.functions.readRoutesMinKudos($routeParams.N);
+		}else if(searchViewModel.functions.where('/blockRoute/'+$routeParams.ID)){
+			searchViewModel.search='kudos greater than '+$routeParams.ID;
+			searchViewModel.functions.updateAvailability(0);
+			$location.path('/');
+		}else if(searchViewModel.functions.where('/unblockRoute/'+$routeParams.ID)){
+			searchViewModel.search='kudos greater than '+$routeParams.ID;
+			searchViewModel.functions.updateAvailability(1);
+			$location.path('/');			
 		}
 		
 	}

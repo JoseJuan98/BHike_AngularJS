@@ -22,6 +22,7 @@
 		<p>Kudos - {{route.kudos}}</p>
 		<p class="see">
 			<!-- <a class="logout_home" href="#!/seeRoute/{{route.id}}" > See </a> -->
-			<a class="logout_home" data-ng-href="#!/editRoute/{{route.id}}" data-ng-show="route.idu == head.user.id"> Edit </a>
+			<a class="logout_home" data-ng-href="#!/editRoute/{{route.id}}" data-ng-show="route.idu == head.user.id"> Edit |</a>
+			<a class="logout_home" data-ng-href="#!/blockRoute/{{route.id}}" data-ng-show="route.blocked != 1"> Block </a>
+			<a class="logout_home" data-ng-href="#!/unblockRoute/{{route.id}}" data-ng-show="route.blocked == 1"> Unblock </a>
 		</p>
-

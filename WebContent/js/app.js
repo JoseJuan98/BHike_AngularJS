@@ -85,6 +85,16 @@ angular.module('BHikeApp', ['ngRoute'])
 			controller: "searchCtrl",
 			controllerAs: "searchVM",
 			templateUrl: "searchTemplate.html"
+		})
+		.when("/blockRoute/:ID", {
+			controller: "searchCtrl",
+			controllerAs: "searchVM",
+			templateUrl: "searchTemplate.html"
+		})
+		.when("/unblockRoute/:ID", {
+			controller: "searchCtrl",
+			controllerAs: "searchVM",
+			templateUrl: "searchTemplate.html"
 		});
 })
 

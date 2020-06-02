@@ -90,6 +90,27 @@ angular.module('BHikeApp')
     			.then(function(response){
     				return response.data;
     			});
+		},
+		getRoutesByAvailability : function(ava){
+			var urlMin = url + 'availability/' + ava;
+			return $http.get(urlMin)
+    			.then(function(response){
+    				return response.data;
+    			});
+		},
+		blockRoute : function(id){
+			var blUrl = url + 'blockRoute/' + id;
+			return $http.put(blUrl)
+    			.then(function(response){
+    				return response;
+    			});
+		},
+		unblockRoute : function(id){
+			var unbUrl = url + 'unblockRoute/' + id;
+			return $http.put(unbUrl)
+    			.then(function(response){
+    				return response;
+    			});
 		}
     }
     return routesInterface;

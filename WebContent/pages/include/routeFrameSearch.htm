@@ -23,8 +23,9 @@
 			</div>
 		</div>
 		<p>Kudos - {{routesByUser.first.kudos}}</p>
-		<br>
-	
-		<!-- <a class="logout_home" href="#!/seeRoute/{{routesByUser.first.id}}" > See </a>-->
-		<a class="see" href="#!/editRoute/{{routesByUser.first.id}}" data-ng-show="routesByUser.first.idu == head.user.id"> Edit </a>
-	
+		<p class="see">
+			<!-- <a class="logout_home" href="#!/seeRoute/{{routesByUser.first.id}}" > See </a>-->
+			<a class="logout_home" href="#!/editRoute/{{routesByUser.first.id}}" data-ng-show="routesByUser.first.idu == head.user.id"> Edit |</a>
+			<a class="logout_home" data-ng-href="#!/blockRoute/{{routesByUser.first.id}}" data-ng-show="routesByUser.first.blocked != 1"> Block </a>
+			<a class="logout_home" data-ng-href="#!/unblockRoute/{{routesByUser.first.id}}" data-ng-show="routesByUser.first.blocked == 1"> Unblock </a>
+		</p>

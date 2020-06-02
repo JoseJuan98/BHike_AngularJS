@@ -14,7 +14,7 @@
 	<div class="div_routesUsr" data-ng-if="routesByUser.first != ''">
 		<div class="routes_container">
 			<div data-ng-repeat="routesByUser in searchVM.routes">
-				<div class="user_routes" data-ng-if=" routesByUser.first.blocked != 1 "
+				<div class="user_routes2" data-ng-if=" routesByUser.first.blocked != 1 "
 					data-ng-include="'include/routeFrameSearch.htm'">
 				</div>
 			</div>
@@ -24,7 +24,7 @@
 	<h3 class="title_m">Blocked Routes</h3>
 	<div class="blocked_container">
 		<div data-ng-repeat="routesByUser in searchVM.routes">
-			<div class="user_routes" id="block_div" data-ng-if=" routesByUser.first.blocked == 1 "
+			<div class="user_routes2" id="block_div" data-ng-if=" routesByUser.first.blocked == 1 "
 				data-ng-include="'include/routeFrameSearch.htm'">
 			</div>
 		</div>

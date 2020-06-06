@@ -2,7 +2,14 @@
 
 ## Software Engineering UNEX - Subject Internet Programming
 
-Project implemented for the course 2019-2020 based on the web application https://es.wikiloc.com/ . Basically, it consists in the implementation of a web application using that web as a reference for the core functionality, obviously, by designing their own user interface and configuration.
+Project implemented for the course 2019-2020 based on the web application https://es.wikiloc.com/ . Basically, it consists in the implementation of a web application using that web as a reference for the core functionality, obviously, by designing my own user interface and configuration.
+
+The web application handles user authentication, which is need it for use the web application. But
+non registered users can, of course, create one account.
+Registered users can authenticate by a login page. Also they can create and see routes, and edit or
+delete the routes owned by them and change the state of availability of any route. In addition they
+can give and take kudos of any route. Also they can edit their user information or delete their
+account.
 
 ## Technologies used
 ### Frotend
@@ -38,3 +45,33 @@ Project implemented for the course 2019-2020 based on the web application https:
 4. Search: a user can search routes typing the words she’s looking for either in the title or in the content (description).
 
 5. Blocked routes: a user may change the state of her routes to blocked to indicate that a concrete route may not be followed at a particular moment due to a special situacion like bad weather consequences, crossing rivers, and so on. In that case, the route will still appear in the web page, however, it will be shown in a different format than those that may still be followed. The application should allow users to filter the routes in order to show just those that may be still followed (in other words, hiding those that are blocked).
+
+## Main Page
+This page shows all the routes that users created segregating by user.
+
+![Image of MainPage](/imgDocu/mainPage.png)
+
+## Login
+
+![Image of Login Page](/imgDocu/Login.png)
+
+## Create User
+
+![Image of Create User](/imgDocu/createUser.png)
+
+## Edit User
+
+![Image of Edit User](/imgDocu/editUser.png)
+
+## Create Route
+
+![Image of Create Route](/imgDocu/createRoute.png)
+
+## Edit Route
+
+![Image of Edit Route](/imgDocu/editRoute.png)
+
+## Collapsable Filter Search
+
+![Image of Filter Search](/imgDocu/filterSearch.png)
+

@@ -6,6 +6,7 @@ Project implemented for the course 2019-2020 based on the web application https:
 
 The web application handles user authentication, which is need it for use the web application. But
 non registered users can, of course, create one account.
+
 Registered users can authenticate by a login page. Also they can create and see routes, and edit or
 delete the routes owned by them and change the state of availability of any route. In addition they
 can give and take kudos of any route. Also they can edit their user information or delete their
@@ -74,4 +75,12 @@ This page shows all the routes that users created segregating by user.
 ## Collapsable Filter Search
 
 ![Image of Filter Search](/imgDocu/filterSearch.png)
+
+## Search
+
+![Image of Search](/imgDocu/Search.png)
+
+## Blocked Routes Format
+
+![Image of Blocked Routes](/imgDocu/BlockedRoutes.png)
 
